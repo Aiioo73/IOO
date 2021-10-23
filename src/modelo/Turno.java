@@ -1,4 +1,4 @@
-package TPO;
+package modelo;
 
 import java.util.Date;
 

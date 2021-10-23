@@ -1,4 +1,4 @@
-package TPO;
+package modelo;
 
 public class Domicilio {
     private String localidad;

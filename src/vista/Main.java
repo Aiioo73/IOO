@@ -1,4 +1,4 @@
-package TPO;
+package vista;
 
 public class Main {
 
