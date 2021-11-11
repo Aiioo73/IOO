@@ -1,15 +1,17 @@
 package modelo;
 
+import java.util.Date;
+
 public class Paciente {
 
     private String nombre;
     private String apellido;
     private Domicilio domicilio;
     private int dni;
-    private String fechaAlta;
+    private Date fechaAlta;
     private Usuario usuario;
 
-    public Paciente(String nombre, String apellido, Domicilio domicilio, int dni, String fechaAlta, Usuario usuario) {
+    public Paciente(String nombre, String apellido, Domicilio domicilio, int dni, Date fechaAlta) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -40,11 +42,11 @@ public class Paciente {
         this.dni = dni;
     }
 
-    public String getFechaAlta() {
+    public Date getFechaAlta() {
         return fechaAlta;
     }
 
-    public void setFechaAlta(String fechaAlta) {
+    public void setFechaAlta(Date fechaAlta) {
         this.fechaAlta = fechaAlta;
     }
 
