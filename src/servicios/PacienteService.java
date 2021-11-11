@@ -14,7 +14,7 @@ public class PacienteService implements IService<Paciente> {
 
     @Override
     public Paciente buscar(int id) {
-        return DummyData.pacientesDeEjemplo().get(1);
+        return DummyData.generarPacientes().get(1);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class PacienteService implements IService<Paciente> {
 
     @Override
     public List<Paciente> listar() {
-        return DummyData.pacientesDeEjemplo();
+        return DummyData.generarPacientes();
     }
 
 }
