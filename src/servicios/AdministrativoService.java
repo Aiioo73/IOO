@@ -1,5 +1,6 @@
 package servicios;
 
+import dao.AdministrativoDAOArchivo;
 import modelo.Administrativo;
 import servicios.abstractions.IService;
 import utils.DummyData;
@@ -28,4 +29,29 @@ public class AdministrativoService implements IService<Administrativo> {
         return DummyData.generarAdministrativos();
     }
 
+//    private AdministrativoDAOArchivo dao;
+//
+//    public AdministrativoService() {
+//        this.dao = new AdministrativoDAOArchivo();
+//    }
+//
+//    @Override
+//    public void guardar(Administrativo entity) {
+//        dao.guardar(entity);
+//    }
+//
+//    @Override
+//    public Administrativo buscar(int id) {
+//        return dao.buscar(id);
+//    }
+//
+//    @Override
+//    public void eliminar(int id) {
+//        dao.eliminar(id);
+//    }
+//
+//    @Override
+//    public List<Administrativo> listar() {
+//        return dao.listar();
+//    }
 }

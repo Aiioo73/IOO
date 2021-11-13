@@ -5,8 +5,7 @@ import utils.StringUtils;
 
 import java.util.Date;
 
-public abstract class Usuario {
-    private int id;
+public abstract class Usuario extends Entidad {
     private String nombreUsuario;
     private String password;
     private String nombreCompleto;
@@ -28,14 +27,6 @@ public abstract class Usuario {
     public boolean checkPassword(String psswd){
         String md5 = StringUtils.getMD5(psswd);
         return password == md5;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNombreUsuario() {
