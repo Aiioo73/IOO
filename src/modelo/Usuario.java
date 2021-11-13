@@ -1,33 +1,50 @@
 package modelo;
 
-
-import modelo.enums.Rol;
+import utils.StringUtils;
 
 import java.util.Date;
 
 public class Usuario {
     private String nombreUsuario;
     private String password;
-    private Date lastLogin;
-    private Rol rol;
+    private String nombreCompleto;
 
+    private String dni;
+    private Date fechaAlta;
 
+    private Domicilio domicilio;
 
-    public Usuario(String nombreUsuario, String password, Rol rol){
+    public Usuario(String nombreUsuario, String passwordHash, String nombreCompleto, String dni, Domicilio domicilio) {
         this.nombreUsuario = nombreUsuario;
-        this.password = password;
-        this.rol = rol;
+        this.password = StringUtils.getMD5(passwordHash);
+        this.nombreCompleto = nombreCompleto;
+        this.dni = dni;
+        this.domicilio = domicilio;
+        this.fechaAlta = new Date();
+    }
+
+    public boolean CheckPassword(String psswd){
+        String md5 = StringUtils.getMD5(psswd);
+        return psswd == md5;
     }
 
     public String getNombreUsuario() {
         return nombreUsuario;
     }
 
-    public String getPassword() {
-        return password;
+    public String getNombreCompleto() {
+        return nombreCompleto;
     }
 
-    public Rol getRol() {
-        return rol;
+    public String getDni() {
+        return dni;
+    }
+
+    public Date getFechaAlta() {
+        return fechaAlta;
+    }
+
+    public Domicilio getDomicilio() {
+        return domicilio;
     }
 }
