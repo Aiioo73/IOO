@@ -68,7 +68,14 @@ public class LoginFrame extends JFrame implements ActionListener {
             userText = userTextField.getText();
             pwdText = passwordField.getText();
             if (userText.equalsIgnoreCase("usuario") && pwdText.equalsIgnoreCase("12345")) {
-                JOptionPane.showMessageDialog(this, "Login Successful");
+                /*frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));*/
+                MainFrame mf = new MainFrame();
+                mf.setTitle("Main Form");
+                mf.setVisible(true);
+                mf.setBounds(500,65,1280,720);
+                mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                mf.setResizable(false);
+                /*JOptionPane.showMessageDialog(this, "Login Successful");*/
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }
