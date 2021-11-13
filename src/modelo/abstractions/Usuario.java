@@ -1,10 +1,11 @@
-package modelo;
+package modelo.abstractions;
 
+import modelo.Domicilio;
 import utils.StringUtils;
 
 import java.util.Date;
 
-public class Usuario {
+public abstract class Usuario {
     private String nombreUsuario;
     private String password;
     private String nombreCompleto;
@@ -23,9 +24,9 @@ public class Usuario {
         this.fechaAlta = new Date();
     }
 
-    public boolean CheckPassword(String psswd){
+    public boolean checkPassword(String psswd){
         String md5 = StringUtils.getMD5(psswd);
-        return psswd == md5;
+        return password == md5;
     }
 
     public String getNombreUsuario() {
