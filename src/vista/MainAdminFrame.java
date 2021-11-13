@@ -1,10 +1,13 @@
 package vista;
+import sun.tools.jconsole.inspector.XObject;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JFrame;
 
-public class MainFrame extends JFrame implements ActionListener {
+public class MainAdminFrame extends JFrame implements ActionListener {
 
     Container container = getContentPane();
     //JLabel userLabel = new JLabel("LALA");
@@ -13,10 +16,16 @@ public class MainFrame extends JFrame implements ActionListener {
     JPasswordField passwordField = new JPasswordField();
     JButton odontologosButton = new JButton("Odontologos");
     JButton pacienteButton = new JButton("Pacientes");
+    JButton adminButton = new JButton("Administradores");
     //JCheckBox showPassword = new JCheckBox("Show Password");
 
+    //Table
+    AdminTable at = new AdminTable();
+    at.createAndShowGUI()
 
-    MainFrame() {
+
+
+    MainAdminFrame() {
         setLayoutManager();
         setLocationAndSize();
         addComponentsToContainer();
@@ -34,8 +43,8 @@ public class MainFrame extends JFrame implements ActionListener {
         //passwordField.setBounds(150, 220, 150, 30);
         //showPassword.setBounds(150, 250, 150, 30);
         odontologosButton.setBounds(50, 25, 130, 30);
-        pacienteButton.setBounds(200, 25, 130, 30);
-
+        pacienteButton.setBounds(180, 25, 130, 30);
+        adminButton.setBounds(310, 25, 130, 30);
 
     }
 
@@ -47,6 +56,7 @@ public class MainFrame extends JFrame implements ActionListener {
         //container.add(showPassword);
         container.add(odontologosButton);
         container.add(pacienteButton);
+        container.add(adminButton);
     }
 
     public void addActionEvent() {
@@ -56,7 +66,9 @@ public class MainFrame extends JFrame implements ActionListener {
     }
 
 
-    @Override
+
+
+
     public void actionPerformed(ActionEvent e) {
         //Coding Part of LOGIN button
         if (e.getSource() == odontologosButton) {

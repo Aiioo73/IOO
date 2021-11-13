@@ -1,8 +1,10 @@
 package modelo;
 
+import modelo.abstractions.Entidad;
+
 import java.util.Date;
 
-public class Turno {
+public class Turno extends Entidad {
 
     private Odontologo docAsignado;
     private Paciente paciente;

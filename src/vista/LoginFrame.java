@@ -69,8 +69,8 @@ public class LoginFrame extends JFrame implements ActionListener {
             pwdText = passwordField.getText();
             if (userText.equalsIgnoreCase("usuario") && pwdText.equalsIgnoreCase("12345")) {
                 /*frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));*/
-                MainFrame mf = new MainFrame();
-                mf.setTitle("Main Form");
+                MainAdminFrame mf = new MainAdminFrame();
+                mf.setTitle("Admin Main");
                 mf.setVisible(true);
                 mf.setBounds(500,65,1280,720);
                 mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
