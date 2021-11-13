@@ -35,14 +35,18 @@ public class DummyData {
                 "password",
                 "Whitney Laurel",
                 "12312312",
-                new Domicilio("Brooklyn", "Briercliff Road", 3984)
+                new Domicilio("Brooklyn", "Briercliff Road", 3984),
+                9,
+                18
         ));
         lista.add(new Odontologo(
                 "lwhitney",
                 "password",
-                "Whitney Laurel",
+                "Whitney Laurel 2",
                 "12312312",
-                new Domicilio("Brooklyn", "Briercliff Road", 3984)
+                new Domicilio("Brooklyn", "Briercliff Road", 3984),
+                10,
+                14
         ));
         return lista;
     }
