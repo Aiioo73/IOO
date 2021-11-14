@@ -1,5 +1,6 @@
 package vista.ABM;
 
+import modelo.Administrativo;
 import modelo.Odontologo;
 import modelo.Paciente;
 
@@ -12,13 +13,30 @@ public class PanelManagerABM {
     private PanelFormularioPacientes panelFormularioPacientes;
     private PanelListaOdontologos panelListaOdontologos;
     private PanelFormularioOdontologos panelFormularioOdontologos;
+    private PanelListaAdministrativos panelListaAdministrativos;
+    private PanelFormularioAdministrativos panelFormularioAdministrativos;
 
     public void armarManagerABM() {
         frame = new JFrame("PacientesABM");
         frame.setBounds(650,65,640,360);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
         panelListaPacientes = new PanelListaPacientes(this);
         panelListaPacientes.armarPanelListaPacientes();
+
+        panelFormularioPacientes = new PanelFormularioPacientes(this);
+        panelFormularioPacientes.ArmarPanelFormulario();
+
+        panelListaOdontologos = new PanelListaOdontologos(this);
+        panelListaOdontologos.armarPanelListaOdontologos();
+
+        panelFormularioOdontologos = new PanelFormularioOdontologos(this);
+        panelFormularioOdontologos.armarPanelFormulario();
+
+        panelListaAdministrativos = new PanelListaAdministrativos(this);
+        panelListaAdministrativos.armarPanelListaAdministrativos();
+
+        panelFormularioAdministrativos = new PanelFormularioAdministrativos(this);
+        panelFormularioAdministrativos.ArmarPanelFormulario();
 
     }
 
@@ -76,10 +94,34 @@ public class PanelManagerABM {
 
     // ----------------- Paneles para  ----------------
 
+    public void mostrarPanelListaAdministrativos() {
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(panelListaAdministrativos);
+        frame.getContentPane().validate();
+        frame.getContentPane().repaint();
+    }
+
+
+    public void mostrarPanelFormularioAdministrativos() {
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(panelFormularioAdministrativos);
+        frame.getContentPane().validate();
+        frame.getContentPane().repaint();
+    }
+
+    public void mostrarPanelFormularioAdministrativos(Administrativo administrativo) {
+        panelFormularioAdministrativos.llenarFormulario(administrativo);
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(panelFormularioAdministrativos);
+        frame.getContentPane().validate();
+        frame.getContentPane().repaint();
+    }
+
 
 
     public void showFrame(){
         frame.setVisible(true);
     }
+
 
 }
