@@ -9,15 +9,13 @@ import javax.swing.JFrame;
 public class MainAdminFrame extends JFrame implements ActionListener {
 
     Container container = getContentPane();
-    //JLabel userLabel = new JLabel("LALA");
-    //JLabel passwordLabel = new JLabel("PASSWORD");
     JTextField userTextField = new JTextField();
     JPasswordField passwordField = new JPasswordField();
     JButton odontologosButton = new JButton("Odontologos");
     JButton pacienteButton = new JButton("Pacientes");
     JButton adminButton = new JButton("Administradores");
     JButton turnosButton = new JButton("Turnos Semanales");
-    //JCheckBox showPassword = new JCheckBox("Show Password");
+    JButton registroTurnoButton = new JButton("Registrar Turno");
 
 
 
@@ -26,7 +24,6 @@ public class MainAdminFrame extends JFrame implements ActionListener {
         setLocationAndSize();
         addComponentsToContainer();
         addActionEvent();
-        //setAdminTable();
     }
 
     public void setAdminTable(){
@@ -39,10 +36,12 @@ public class MainAdminFrame extends JFrame implements ActionListener {
     }
 
     public void setLocationAndSize() {
-        odontologosButton.setBounds(50, 25, 130, 30);
+        registroTurnoButton.setBounds(50, 25, 140, 30);
         pacienteButton.setBounds(180, 25, 130, 30);
         adminButton.setBounds(310, 25, 130, 30);
-        turnosButton.setBounds(440, 25, 130, 30);
+        odontologosButton.setBounds(440, 25, 130, 30);
+        turnosButton.setBounds(570, 25, 140, 30);
+
     }
 
     public void addComponentsToContainer() {
@@ -50,6 +49,7 @@ public class MainAdminFrame extends JFrame implements ActionListener {
         container.add(pacienteButton);
         container.add(adminButton);
         container.add(turnosButton);
+        container.add(registroTurnoButton);
     }
 
     public void addActionEvent() {
@@ -64,7 +64,6 @@ public class MainAdminFrame extends JFrame implements ActionListener {
 
 
     public void actionPerformed(ActionEvent e) {
-        //Coding Part of LOGIN button
         if (e.getSource() == turnosButton) {
             setAdminTable();
         }
