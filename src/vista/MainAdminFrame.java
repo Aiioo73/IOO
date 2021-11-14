@@ -18,10 +18,6 @@ public class MainAdminFrame extends JFrame implements ActionListener {
     JButton adminButton = new JButton("Administradores");
     //JCheckBox showPassword = new JCheckBox("Show Password");
 
-    //Table
-    AdminTable at = new AdminTable();
-//    at.createAndShowGUI();
-
 
 
     MainAdminFrame() {
@@ -29,6 +25,13 @@ public class MainAdminFrame extends JFrame implements ActionListener {
         setLocationAndSize();
         addComponentsToContainer();
         addActionEvent();
+        setAdminTable();
+    }
+
+    public void setAdminTable(){
+        AdminTable at = new AdminTable();
+        at.createAndShowGUI();
+
     }
 
     public void setLayoutManager() {
@@ -36,11 +39,6 @@ public class MainAdminFrame extends JFrame implements ActionListener {
     }
 
     public void setLocationAndSize() {
-        //userLabel.setBounds(50, 150, 100, 30);
-        //passwordLabel.setBounds(50, 220, 100, 30);
-        //userTextField.setBounds(150, 150, 150, 30);
-        //passwordField.setBounds(150, 220, 150, 30);
-        //showPassword.setBounds(150, 250, 150, 30);
         odontologosButton.setBounds(50, 25, 130, 30);
         pacienteButton.setBounds(180, 25, 130, 30);
         adminButton.setBounds(310, 25, 130, 30);
@@ -48,11 +46,6 @@ public class MainAdminFrame extends JFrame implements ActionListener {
     }
 
     public void addComponentsToContainer() {
-        //container.add(userLabel);
-        //container.add(passwordLabel);
-        //container.add(userTextField);
-        //container.add(passwordField);
-        //container.add(showPassword);
         container.add(odontologosButton);
         container.add(pacienteButton);
         container.add(adminButton);

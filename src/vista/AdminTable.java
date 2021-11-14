@@ -7,6 +7,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalTime;
+import java.util.Date;
 
 public class AdminTable extends JPanel {
     private boolean DEBUG = false;
@@ -14,28 +16,23 @@ public class AdminTable extends JPanel {
     public AdminTable() {
         super(new GridLayout(1, 0));
 
-        String[] columnNames = {"First Name",
-                "Last Name",
-                "Sport",
-                "# of Years",
-                "Vegetarian"};
+        String[] columnNames = {"Odontologo",
+                "Paciente",
+                "Dia",
+                "Hora"};
 
         Object[][] data = {
-                {"Kathy", "Smith",
-                        "Snowboarding", new Integer(5), new Boolean(false)},
-                {"John", "Doe",
-                        "Rowing", new Integer(3), new Boolean(true)},
-                {"Sue", "Black",
-                        "Knitting", new Integer(2), new Boolean(false)},
-                {"Jane", "White",
-                        "Speed reading", new Integer(20), new Boolean(true)},
-                {"Joe", "Brown",
-                        "Pool", new Integer(10), new Boolean(false)}
+                {"Arturo Garraham", "Leandro Silva",
+                        "16-11-2021", "14:00"},
+                {"Arturo Garraham", "Hernan Caire",
+                        "16-11-2021", "15:00"}
         };
 
         final JTable table = new JTable(data, columnNames);
-        table.setPreferredScrollableViewportSize(new Dimension(500, 70));
-        table.setFillsViewportHeight(true);
+        table.setBounds(500,55,1280,720);
+        //table.setPreferredScrollableViewportSize(new Dimension(800, 70));
+        //table.setFillsViewportHeight(true);
+
 
         if (DEBUG) {
             table.addMouseListener(new MouseAdapter() {
@@ -70,8 +67,8 @@ public class AdminTable extends JPanel {
 
     public void createAndShowGUI() {
         //Create and set up the window.
-        JFrame frame = new JFrame("SimpleTableDemo");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JFrame frame = new JFrame("Turnos Semanales");
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         //Create and set up the content pane.
         AdminTable newContentPane = new AdminTable();
