@@ -11,8 +11,6 @@ import javax.swing.JFrame;
 public class MainAdminFrame extends JFrame implements ActionListener {
 
     Container container = getContentPane();
-    JTextField userTextField = new JTextField();
-    JPasswordField passwordField = new JPasswordField();
     JButton odontologosButton = new JButton("Odontologos");
     JButton pacienteButton = new JButton("Pacientes");
     JButton adminButton = new JButton("Administradores");
@@ -40,9 +38,18 @@ public class MainAdminFrame extends JFrame implements ActionListener {
         panelManager.showFrame();
     }
 
+    public void setOdontologoTable(){
+        System.out.println("Falta ABM Odontologo");
+    }
+
+    public void setAdminABMTable(){
+        System.out.println("Fatla ABM admin");
+    }
+
     public void setLayoutManager() {
         container.setLayout(null);
     }
+
 
     public void setLocationAndSize() {
         registroTurnoButton.setBounds(50, 25, 140, 30);
@@ -65,7 +72,7 @@ public class MainAdminFrame extends JFrame implements ActionListener {
         odontologosButton.addActionListener(this);
         pacienteButton.addActionListener(this);
         turnosButton.addActionListener(this);
-        //showPassword.addActionListener(this);
+        adminButton.addActionListener(this);
     }
 
 
@@ -79,6 +86,14 @@ public class MainAdminFrame extends JFrame implements ActionListener {
         if (e.getSource() == turnosButton) {
             setAdminTable();
         }
+        if (e.getSource() == odontologosButton) {
+            setOdontologoTable();
+        }
+        if (e.getSource()== adminButton){
+            setAdminABMTable();
+        }
+
+
     }
 
 
