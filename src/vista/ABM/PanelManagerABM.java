@@ -1,5 +1,6 @@
 package vista.ABM;
 
+import modelo.Odontologo;
 import modelo.Paciente;
 
 import javax.swing.*;
@@ -9,6 +10,8 @@ public class PanelManagerABM {
     private JFrame frame;
     private PanelListaPacientes panelListaPacientes;
     private PanelFormularioPacientes panelFormularioPacientes;
+    private PanelListaOdontologos panelListaOdontologos;
+    private PanelFormularioOdontologos panelFormularioOdontologos;
 
     public void armarManagerABM() {
         frame = new JFrame("PacientesABM");
@@ -19,22 +22,23 @@ public class PanelManagerABM {
 
     }
 
-    public void mostrarPanelLista() {
+    // ----------------- Paneles para Pacientes ----------------
+    public void mostrarPanelListaPacientes() {
         frame.getContentPane().removeAll();
         frame.getContentPane().add(panelListaPacientes);
         frame.getContentPane().validate();
         frame.getContentPane().repaint();
     }
 
-    public void mostrarPanelFormulario() {
+    public void mostrarPanelFormularioPacientes() {
         frame.getContentPane().removeAll();
         frame.getContentPane().add(panelFormularioPacientes);
         frame.getContentPane().validate();
         frame.getContentPane().repaint();
 
     }
-
-    public void mostrarPanelFormulario(Paciente paciente){
+    //Debo sobrecargarlo para poder recuperar un Paciente y mostrarlo al momento de "modificar".
+    public void mostrarPanelFormularioPacientes(Paciente paciente){
         panelFormularioPacientes.llenarFormulario(paciente);
         frame.getContentPane().removeAll();
         frame.getContentPane().add(panelFormularioPacientes);
@@ -42,6 +46,37 @@ public class PanelManagerABM {
         frame.getContentPane().repaint();
 
     }
+
+
+    // ----------------- Paneles para Odontologos ----------------
+
+    public void mostrarPanelListaOdontologos() {
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(panelListaOdontologos);
+        frame.getContentPane().validate();
+        frame.getContentPane().repaint();
+    }
+
+    public void mostrarPanelFormularioOdontologos() {
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(panelFormularioOdontologos);
+        frame.getContentPane().validate();
+        frame.getContentPane().repaint();
+
+    }
+    //Debo sobrecargarlo para poder recuperar un Paciente y mostrarlo al momento de "modificar".
+    public void mostrarPanelFormularioOdontologos(Odontologo odontologo){
+        panelFormularioOdontologos.llenarFormulario(odontologo);
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(panelFormularioOdontologos);
+        frame.getContentPane().validate();
+        frame.getContentPane().repaint();
+
+    }
+
+    // ----------------- Paneles para  ----------------
+
+
 
     public void showFrame(){
         frame.setVisible(true);

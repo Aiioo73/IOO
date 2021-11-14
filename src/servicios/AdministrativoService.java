@@ -3,31 +3,10 @@ package servicios;
 import dao.AdministrativoDAOArchivo;
 import modelo.Administrativo;
 import servicios.abstractions.IService;
-import utils.DummyData;
 
 import java.util.List;
 
 public class AdministrativoService implements IService<Administrativo> {
-
-//    @Override
-//    public void guardar(Administrativo entity) {
-//
-//    }
-//
-//    @Override
-//    public Administrativo buscar(int id) {
-//        return DummyData.generarAdministrativos().get(1);
-//    }
-//
-//    @Override
-//    public void eliminar(int id) {
-//
-//    }
-//
-//    @Override
-//    public List<Administrativo> listar() {
-//        return DummyData.generarAdministrativos();
-//    }
 
     private AdministrativoDAOArchivo dao;
 
@@ -43,6 +22,18 @@ public class AdministrativoService implements IService<Administrativo> {
     @Override
     public Administrativo buscar(int id) {
         return dao.buscar(id);
+    }
+
+    public Administrativo buscar(String nombreUsuario) {
+        List<Administrativo> list = dao.listar();
+
+        for (Administrativo admin: list) {
+            if (admin.getNombreUsuario() == nombreUsuario) {
+                return admin;
+            }
+        }
+
+        return null;
     }
 
     @Override

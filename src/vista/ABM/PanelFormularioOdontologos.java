@@ -1,5 +1,6 @@
 package vista.ABM;
 
+import modelo.Odontologo;
 import modelo.Paciente;
 import utils.SpringUtilities;
 
@@ -8,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelFormularioPacientes extends JPanel {
+public class PanelFormularioOdontologos extends JPanel {
 
     private PanelManagerABM panelManagerABM;
 
@@ -31,10 +32,9 @@ public class PanelFormularioPacientes extends JPanel {
     private JPanel panelComponentes;
 
 
-    public PanelFormularioPacientes (PanelManagerABM panelManagerABM){
+    public PanelFormularioOdontologos (PanelManagerABM panelManagerABM){
         this.panelManagerABM = panelManagerABM;
     }
-
 
     public void ArmarPanelFormulario(){
         setLayout(new BorderLayout());
@@ -83,36 +83,35 @@ public class PanelFormularioPacientes extends JPanel {
         add(panelBotonera, BorderLayout.SOUTH);
         add(panelComponentes, BorderLayout.CENTER);
 
+
+
         btnGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Guardar en Base de datos
                 System.out.println("Se grabo en la base de datos");
-                JOptionPane.showMessageDialog(panelComponentes,"El Paciente fue creado correctamente!","Alta de Paciente",JOptionPane.INFORMATION_MESSAGE);
-                panelManagerABM.mostrarPanelListaPacientes();
+                JOptionPane.showMessageDialog(panelComponentes,"El Odontologo fue creado correctamente!","Alta de Odontologo",JOptionPane.INFORMATION_MESSAGE);
+                panelManagerABM.mostrarPanelListaOdontologos();
             }
         });
 
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelManagerABM.mostrarPanelListaPacientes();
+                panelManagerABM.mostrarPanelListaOdontologos();
             }
         });
 
-    }
 
+    }
 
 
     //Necesito llenar el formulario para cuando quieran modificar algo:
-    public void llenarFormulario(Paciente paciente){
-        txtNombreCompleto.setText(paciente.getNombreCompleto());
-        txtDNI.setText(paciente.getDni());
-        txtNombreDeUsuario.setText(paciente.getNombreUsuario());
+    public void llenarFormulario(Odontologo odontologo){
+        txtNombreCompleto.setText(odontologo.getNombreCompleto());
+        txtDNI.setText(odontologo.getDni());
+        txtNombreDeUsuario.setText(odontologo.getNombreUsuario());
     }
-
-
-
 
 
 }
