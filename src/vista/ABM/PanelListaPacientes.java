@@ -21,7 +21,7 @@ public class PanelListaPacientes extends JPanel {
     private DefaultTableModel contenidoTable;  //Sirve para manejar el contenido de la tabla
     private JScrollPane scrollPane;   //Sirve para poder hacer el Scroll en la grilla.
 
-    private PanelManagerABM panelManagerABM;
+    private final PanelManagerABM panelManagerABM;
 
     public PanelListaPacientes(PanelManagerABM panelManagerABM){
         this.panelManagerABM = panelManagerABM;
@@ -81,7 +81,8 @@ public class PanelListaPacientes extends JPanel {
         btnAlta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //llamar al formulario
+                //llamar al formulario:
+                panelManagerABM.mostrarPanelFormulario();
             }
         });
 
@@ -89,8 +90,19 @@ public class PanelListaPacientes extends JPanel {
         btnBaja.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Llamar a borrar Paciente
-            }
+                //Obtengo el valor del ID para poder saber que valor elimino del JSON
+                
+/*                System.out.println(tablePacientes.getValueAt(tablePacientes.getSelectedRow(),0));
+                String eliminarPaciente = tablePacientes.getValueAt(tablePacientes.getSelectedRow(),0).toString();
+
+                int var=JOptionPane.showConfirmDialog(this,"¿Estas Seguro que deseas Eliminar el Paciente" + eliminarPaciente + "?","",JOptionPane.YES_NO_OPTION);
+
+                if( var == JOptionPane.YES_OPTION){
+                    //Eliminar de la base
+                }else{
+                    panelManagerABM.mostrarPanelLista();
+                }
+*/            }
         });
 
 
@@ -98,6 +110,9 @@ public class PanelListaPacientes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Llamar al formulario de Modificaciones.
+                //Necesito obtener datos del paciente para poder rellenar el formulario, como los consulto?
+
+                //panelManagerABM.mostrarPanelFormulario(paciente);
             }
         });
 

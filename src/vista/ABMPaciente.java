@@ -1,5 +1,7 @@
 package vista;
 
+import vista.ABM.PanelManagerABM;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,24 +21,6 @@ public class ABMPaciente {
         pnlABM.setLayout(new FlowLayout());
 
 
-        //Etiquetas:
-        JLabel lblNombre = new JLabel();
-        lblNombre.setText("Nombre");
-        pnlABM.add(lblNombre);
-
-
-        JLabel lblApellido = new JLabel();
-        lblNombre.setText("Apellido");
-        pnlABM.add(lblApellido);
-
-        JLabel lbldni = new JLabel();
-        lblNombre.setText("DNI");
-        pnlABM.add(lbldni);
-
-        JLabel lblusuario = new JLabel();
-        lblNombre.setText("Nombre de Usuario");
-        pnlABM.add(lblusuario);
-
 
         //Mensajes:
         //Usuario Creado Correctamente
@@ -46,5 +30,12 @@ public class ABMPaciente {
         //Usuario Modificado Correctamente
         JOptionPane.showMessageDialog(pnlABM,"El Paciente fue modificado correctamente!","Modificación de Paciente",JOptionPane.INFORMATION_MESSAGE);
 
+
+
+        //Agrego el panelManager de ABM
+        PanelManagerABM panelManager = new PanelManagerABM();
+        panelManager.armarManagerABM();
+        panelManager.mostrarPanelLista();
+        panelManager.showFrame();
     }
 }
