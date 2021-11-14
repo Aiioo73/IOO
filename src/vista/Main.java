@@ -4,14 +4,13 @@ import modelo.Administrativo;
 import servicios.AdministrativoService;
 import utils.DummyData;
 
-import javax.swing.*;
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        GenerarInfoEjemplo();
+        generarInfoEjemplo();
 
         //Creating object of LoginFrame class and setting some of its properties
         LoginFrame frame=new LoginFrame();
@@ -22,10 +21,10 @@ public class Main {
         frame.setResizable(false);
     }
 
-    public static void GenerarInfoEjemplo() {
-        AdministrativoService test = new AdministrativoService();
+    public static void generarInfoEjemplo() {
+        AdministrativoService administrativoService = new AdministrativoService();
 
-        List<Administrativo> list = test.listar();
+        List<Administrativo> list = administrativoService.listar();
 
         for (Administrativo a: list) {
             System.out.println(a.getNombreCompleto());
@@ -34,10 +33,10 @@ public class Main {
         List<Administrativo> newInfo = DummyData.generarAdministrativos();
 
         for (Administrativo a: newInfo) {
-            test.guardar(a);
+            administrativoService.guardar(a);
         }
 
-        list = test.listar();
+        list = administrativoService.listar();
 
         for (Administrativo a: list) {
             System.out.println(a.getNombreCompleto());

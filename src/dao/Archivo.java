@@ -1,9 +1,14 @@
 package dao;
 
-import java.io.*;
-import java.util.List;
+import com.google.gson.Gson;
 
-public class Archivo {
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+
+public class Archivo<T> {
 
     private String path;
 
@@ -14,41 +19,71 @@ public class Archivo {
 
     public void guardar(List listado)
     {
+        File myObj = new File(path);
+
+        if (myObj.exists()) {
+            myObj.delete();
+        }
 
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(path);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(listado);
-            objectOutputStream.close();
-            fileOutputStream.close();
-
-        } catch (FileNotFoundException e) {
+            myObj.createNewFile();
+        } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        String json = new Gson().toJson(listado);
+
+        try {
+            FileWriter myWriter = new FileWriter(path);
+            myWriter.write(json);
+            myWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public List recuperar()
+    public List recuperar(Class<T[]> cls)
     {
-        List listado = null;
+        checkearExistencia(path);
 
+        File myObj = new File(path);
+        Scanner myReader = null;
+        String data = null;
         try {
-            FileInputStream fileInputStream = new FileInputStream(path);
-            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-            listado = (List) objectInputStream.readObject();
-            objectInputStream.close();
-            fileInputStream.close();
-
+            myReader = new Scanner(myObj);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        }
+        while (myReader.hasNextLine()) {
+            data = myReader.nextLine();
+        }
+        myReader.close();
+
+        return new ArrayList<T>(Arrays.asList(new Gson().fromJson(data, cls)));
+    }
+
+    private void checkearExistencia(String path) {
+        File myObj = new File(path);
+
+        if (myObj.exists()) {
+            return;
+        }
+
+        try {
+            myObj.createNewFile();
         } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
-        return listado;
+        List list = new ArrayList();
+        String json = new Gson().toJson(list);
 
+        try {
+            FileWriter myWriter = new FileWriter(path);
+            myWriter.write(json);
+            myWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

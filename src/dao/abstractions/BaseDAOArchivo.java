@@ -8,9 +8,11 @@ import java.util.List;
 
 public class BaseDAOArchivo<T extends Entidad> implements IDAO<T>{
     private String path;
+    Class<T[]> cls;
 
-    public BaseDAOArchivo() {
-        this.path = this.getClass().getSimpleName() + ".txt";
+    public BaseDAOArchivo(Class<T[]> cls) {
+        this.cls = cls;
+        this.path = this.getClass().getSimpleName() + ".json";
     }
 
     @Override
@@ -38,9 +40,10 @@ public class BaseDAOArchivo<T extends Entidad> implements IDAO<T>{
             for(T p:lista) {
                 if(p.getId() == entity.getId())
                 {
-//                    p.setApellido(persona.getApellido());
-//                    p.setEdad(persona.getEdad());
-//                    p.setNombre(persona.getNombre());
+                    //Elimino el viejo
+                    lista.remove(p);
+                    //Agrego el nuevo
+                    lista.add(entity);
                 }
             }
         }
@@ -78,7 +81,7 @@ public class BaseDAOArchivo<T extends Entidad> implements IDAO<T>{
     public List<T> listar() {
         //1 recuperar de un archivo
         Archivo archivo = new Archivo(path);
-        List lista = archivo.recuperar();
+        List<T> lista = (List<T>) archivo.recuperar(cls);
 
         if(lista == null)
             lista = new ArrayList<>();

@@ -1,5 +1,4 @@
 package vista;
-import sun.tools.jconsole.inspector.XObject;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +20,7 @@ public class MainAdminFrame extends JFrame implements ActionListener {
 
     //Table
     AdminTable at = new AdminTable();
-    at.createAndShowGUI()
+//    at.createAndShowGUI();
 
 
 

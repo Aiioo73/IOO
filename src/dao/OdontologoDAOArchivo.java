@@ -5,4 +5,7 @@ import modelo.Odontologo;
 import modelo.Paciente;
 
 public class OdontologoDAOArchivo extends BaseDAOArchivo<Odontologo> {
+    public OdontologoDAOArchivo() {
+        super(Odontologo[].class);
+    }
 }
