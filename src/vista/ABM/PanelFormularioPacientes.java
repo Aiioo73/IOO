@@ -89,7 +89,6 @@ public class PanelFormularioPacientes extends JPanel {
                 //Guardar en Base de datos
                 System.out.println("Se grabo en la base de datos");
                 JOptionPane.showMessageDialog(panelComponentes,"El Paciente fue creado correctamente!","Alta de Paciente",JOptionPane.INFORMATION_MESSAGE);
-
                 panelManagerABM.mostrarPanelLista();
             }
         });

@@ -112,7 +112,7 @@ public class PanelListaPacientes extends JPanel {
                 //Llamar al formulario de Modificaciones.
                 //Necesito obtener datos del paciente para poder rellenar el formulario, como los consulto?
 
-                //panelManagerABM.mostrarPanelFormulario(paciente);
+                panelManagerABM.mostrarPanelFormulario(paciente);
             }
         });
 
