@@ -6,7 +6,9 @@ import modelo.Paciente;
 import servicios.AdministrativoService;
 import servicios.OdontologoService;
 import servicios.PacienteService;
+import servicios.TurnoService;
 
+import java.util.Date;
 import java.util.List;
 
 public class Ejemplos {
@@ -37,8 +39,14 @@ public class Ejemplos {
     public static void obtenerDisponibilidadOdontologo() {
         OdontologoService odontologoService = new OdontologoService();
 
-        for (Odontologo odo: odontologoService.listar()) {
-            System.out.println(odo.getNombreCompleto());
+        Odontologo odontologo = odontologoService.buscar(1);
+
+        TurnoService turnoService = new TurnoService();
+
+        List<Date> turnosDisponiblesOdontologo = turnoService.obtenerDisponibilidad(odontologo);
+
+        for (Date turno: turnosDisponiblesOdontologo) {
+            System.out.println(odontologo.getNombreCompleto() + " tiene disponible: " + turno);
         }
 
     }
