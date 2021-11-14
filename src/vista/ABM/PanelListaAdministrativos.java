@@ -1,7 +1,8 @@
 package vista.ABM;
 
-import modelo.Domicilio;
+import modelo.Administrativo;
 import modelo.Paciente;
+import servicios.AdministrativoService;
 import servicios.PacienteService;
 
 import javax.swing.*;
@@ -9,29 +10,26 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
-public class PanelListaPacientes extends JPanel {
+public class PanelListaAdministrativos extends JPanel {
+
+    private PanelManagerABM panelManagerABM;
 
     private JButton btnAlta;
     private JButton btnBaja;
     private JButton btnModificar;
     private JPanel panelBotonera;  //Creo un panel para los botones
 
-    private JTable tablePacientes;
+    private JTable tableAdministrativos;
     private DefaultTableModel contenidoTable;  //Sirve para manejar el contenido de la tabla
     private JScrollPane scrollPane;   //Sirve para poder hacer el Scroll en la grilla.
 
-    private PanelManagerABM panelManagerABM;
-
-    public PanelListaPacientes(PanelManagerABM panelManagerABM){
+    public PanelListaAdministrativos(PanelManagerABM panelManagerABM){
         this.panelManagerABM = panelManagerABM;
     }
 
-    public void armarPanelListaPacientes(){
-
-        this.setLayout(new BorderLayout());
+    public void armarPanelListaAdministrativos() {
 
         //Botonera
         btnAlta = new JButton("Crear Usuario");
@@ -46,34 +44,23 @@ public class PanelListaPacientes extends JPanel {
 
         scrollPane = new JScrollPane();
         contenidoTable = new DefaultTableModel();
-        tablePacientes = new JTable(contenidoTable);
+        tableAdministrativos = new JTable(contenidoTable);
         //Agrego la tabla de pacientes al ScrollPane:
-        scrollPane.setViewportView(tablePacientes);
+        scrollPane.setViewportView(tableAdministrativos);
 
-        // ------------------------------------------------------------------------//
-        //Listado de Pacientes (se debe recuperar del JSON)
-
-        PacienteService service = new PacienteService();
-        List<Paciente> lista = service.listar();
-
-//        Domicilio domicilio1 = new Domicilio("Wilde","Las Flores",221);
-//        lista.add(new Paciente("Jorge","PEDRITO20","Jorge Sanchez","243221343",domicilio1));
-
+        AdministrativoService service = new AdministrativoService();
+        List<Administrativo> lista = service.listar();
         contenidoTable.addColumn("ID");
         contenidoTable.addColumn("Nombre Completo");
         contenidoTable.addColumn("Fecha de Alta");
-
-        for(Paciente paciente : lista){
+        for (Administrativo administrativo : lista) {
             Object[] row = new Object[3];
-            row[0] = paciente.getId();
-            row[1] = paciente.getNombreCompleto();
-            row[2] = paciente.getFechaAlta();
+            row[0] = administrativo.getId();
+            row[1] = administrativo.getNombreCompleto();
+            row[2] = administrativo.getFechaAlta();
 
             contenidoTable.addRow(row);
         }
-
-        // ------------------------------------------------------------------------//
-
 
         //Muestro la tabla y el panel:
         add(panelBotonera, BorderLayout.SOUTH);
@@ -81,23 +68,20 @@ public class PanelListaPacientes extends JPanel {
         this.setVisible(true);
 
 
-
-
         //Eventos
         btnAlta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //llamar al formulario:
-                panelManagerABM.mostrarPanelFormularioPacientes();
+                panelManagerABM.mostrarPanelFormularioAdministrativos();
             }
         });
-
 
         btnBaja.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Obtengo el valor del ID para poder saber que valor elimino del JSON
-                
+
 /*                System.out.println(tablePacientes.getValueAt(tablePacientes.getSelectedRow(),0));
                 String eliminarPaciente = tablePacientes.getValueAt(tablePacientes.getSelectedRow(),0).toString();
 
@@ -123,4 +107,6 @@ public class PanelListaPacientes extends JPanel {
         });
 
     }
+
+
 }

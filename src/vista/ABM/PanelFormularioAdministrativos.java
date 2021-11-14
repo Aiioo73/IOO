@@ -1,7 +1,6 @@
 package vista.ABM;
 
-import modelo.Odontologo;
-import modelo.Paciente;
+import modelo.Administrativo;
 import utils.SpringUtilities;
 
 import javax.swing.*;
@@ -9,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PanelFormularioOdontologos extends JPanel {
+public class PanelFormularioAdministrativos extends JPanel {
 
     private PanelManagerABM panelManagerABM;
 
@@ -32,12 +31,11 @@ public class PanelFormularioOdontologos extends JPanel {
     private JPanel panelComponentes;
 
 
-    public PanelFormularioOdontologos (PanelManagerABM panelManagerABM){
+    public PanelFormularioAdministrativos(PanelManagerABM panelManagerABM){
         this.panelManagerABM = panelManagerABM;
     }
 
-    public void armarPanelFormulario(){
-        setLayout(new BorderLayout());
+    public void ArmarPanelFormulario(){
 
         btnGuardar = new JButton("Guardar");
         btnCancelar = new JButton("Cancelar");
@@ -61,7 +59,6 @@ public class PanelFormularioOdontologos extends JPanel {
         txtAltura = new JTextField(8);
         txtNombreDeUsuario = new JTextField(8);
 
-
         panelComponentes.add(lblNombreCompleto);
         panelComponentes.add(txtNombreCompleto);
         panelComponentes.add(lblDNI);
@@ -83,35 +80,29 @@ public class PanelFormularioOdontologos extends JPanel {
         add(panelBotonera, BorderLayout.SOUTH);
         add(panelComponentes, BorderLayout.CENTER);
 
-
-
         btnGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Guardar en Base de datos
                 System.out.println("Se grabo en la base de datos");
-                JOptionPane.showMessageDialog(panelComponentes,"El Odontologo fue creado correctamente!","Alta de Odontologo",JOptionPane.INFORMATION_MESSAGE);
-                panelManagerABM.mostrarPanelListaOdontologos();
+                JOptionPane.showMessageDialog(panelComponentes,"El Administrativo fue creado correctamente!","Alta de Administrativo",JOptionPane.INFORMATION_MESSAGE);
+                panelManagerABM.mostrarPanelListaAdministrativos();
             }
         });
 
         btnCancelar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                panelManagerABM.mostrarPanelListaOdontologos();
+                panelManagerABM.mostrarPanelListaAdministrativos();
             }
         });
 
-
     }
 
 
-    //Necesito llenar el formulario para cuando quieran modificar algo:
-    public void llenarFormulario(Odontologo odontologo){
-        txtNombreCompleto.setText(odontologo.getNombreCompleto());
-        txtDNI.setText(odontologo.getDni());
-        txtNombreDeUsuario.setText(odontologo.getNombreUsuario());
+    public void llenarFormulario(Administrativo administrativo) {
+        txtNombreCompleto.setText(administrativo.getNombreCompleto());
+        txtDNI.setText(administrativo.getDni());
+        txtNombreDeUsuario.setText(administrativo.getNombreUsuario());
     }
-
-
 }

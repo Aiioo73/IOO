@@ -39,11 +39,17 @@ public class MainAdminFrame extends JFrame implements ActionListener {
     }
 
     public void setOdontologoTable(){
-        System.out.println("Falta ABM Odontologo");
+        PanelManagerABM panelManager = new PanelManagerABM();
+        panelManager.armarManagerABM();
+        panelManager.mostrarPanelListaOdontologos();
+        panelManager.showFrame();
     }
 
     public void setAdminABMTable(){
-        System.out.println("Fatla ABM admin");
+        PanelManagerABM panelManager = new PanelManagerABM();
+        panelManager.armarManagerABM();
+        panelManager.mostrarPanelListaAdministrativos();
+        panelManager.showFrame();
     }
 
     public void setLayoutManager() {
