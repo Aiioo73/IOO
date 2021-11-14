@@ -3,6 +3,7 @@ package utils;
 import modelo.Administrativo;
 import modelo.Odontologo;
 import modelo.Paciente;
+import modelo.Turno;
 import servicios.AdministrativoService;
 import servicios.OdontologoService;
 import servicios.PacienteService;
@@ -36,7 +37,7 @@ public class Ejemplos {
         }
     }
 
-    public static void obtenerDisponibilidadOdontologo() {
+    public static void generarTurno() {
         OdontologoService odontologoService = new OdontologoService();
 
         Odontologo odontologo = odontologoService.buscar(1);
@@ -49,5 +50,11 @@ public class Ejemplos {
             System.out.println(odontologo.getNombreCompleto() + " tiene disponible: " + turno);
         }
 
+        PacienteService pacienteService = new PacienteService();
+        Paciente paciente = pacienteService.buscar(1);
+
+        Turno turno = new Turno(odontologo, paciente, new Date());
+
+        turnoService.guardar(turno);
     }
 }

@@ -1,20 +1,14 @@
 package vista;
 import javax.swing.*;
-import modelo.Administrativo;
-import servicios.AdministrativoService;
-import servicios.TurnoService;
-import utils.DummyData;
-import utils.Ejemplos;
 
-import java.util.Date;
-import java.util.List;
+import utils.Ejemplos;
 
 public class Main {
 
     public static void main(String[] args) {
 
         Ejemplos.generarInfoEjemplo();
-        Ejemplos.obtenerDisponibilidadOdontologo();
+        Ejemplos.generarTurno();
 
         //Creating object of LoginFrame class and setting some of its properties
         LoginFrame frame=new LoginFrame();

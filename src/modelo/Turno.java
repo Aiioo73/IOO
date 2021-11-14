@@ -11,19 +11,14 @@ public class Turno extends Entidad {
     private int idTurno;
     private Date fechaTurno;
 
-    public Turno(Odontologo docAsignado, Paciente paciente, int idTurno, Date fechaTurno) {
+    public Turno(Odontologo docAsignado, Paciente paciente, Date fechaTurno) {
         this.docAsignado = docAsignado;
         this.paciente = paciente;
-        this.idTurno = idTurno;
         this.fechaTurno = fechaTurno;
     }
 
     public Odontologo getDocAsignado() {
         return docAsignado;
-    }
-
-    public void setDocAsignado(Odontologo docAsignado) {
-        this.docAsignado = docAsignado;
     }
 
     public Paciente getPaciente() {
@@ -32,14 +27,6 @@ public class Turno extends Entidad {
 
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
-    }
-
-    public int getIdTurno() {
-        return idTurno;
-    }
-
-    public void setIdTurno(int idTurno) {
-        this.idTurno = idTurno;
     }
 
     public Date getFechaTurno() {

@@ -2,6 +2,7 @@ package servicios;
 
 import dao.TurnoDAOArchivo;
 import modelo.Odontologo;
+import modelo.Paciente;
 import modelo.Turno;
 import servicios.abstractions.IService;
 import utils.DateUtils;
@@ -41,6 +42,12 @@ public class TurnoService implements IService<Turno> {
     public List<Turno> listar(Odontologo odontologo) {
         List<Turno> lista = listar();
         lista.removeIf(turno -> turno.getDocAsignado() != odontologo);
+        return lista;
+    }
+
+    public List<Turno> listar(Paciente paciente) {
+        List<Turno> lista = listar();
+        lista.removeIf(turno -> turno.getPaciente() != paciente);
         return lista;
     }
 
