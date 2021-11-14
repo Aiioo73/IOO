@@ -1,5 +1,9 @@
 package vista;
 
+import vista.ABM.PanelFormularioPacientes;
+import vista.ABM.PanelListaPacientes;
+import vista.ABM.PanelManagerABM;
+import vista.ABMPaciente;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -29,6 +33,11 @@ public class MainAdminFrame extends JFrame implements ActionListener {
     public void setAdminTable(){
         AdminTable at = new AdminTable();
         at.createAndShowGUI();
+    }
+
+    public void setPacienteTable(){
+        PanelManagerABM panelManager = new PanelManagerABM();
+
     }
 
     public void setLayoutManager() {
@@ -64,10 +73,12 @@ public class MainAdminFrame extends JFrame implements ActionListener {
 
 
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == pacienteButton) {
+            setPacienteTable();
+        }
         if (e.getSource() == turnosButton) {
             setAdminTable();
         }
-
     }
 
 
