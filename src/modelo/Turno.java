@@ -46,7 +46,5 @@ public class Turno extends Entidad {
         return fechaTurno;
     }
 
-    public void setFechaTurno(Date fechaTurno) {
-        this.fechaTurno = fechaTurno;
-    }
+    public int getHoraTurno() { return fechaTurno.getHours(); }
 }
