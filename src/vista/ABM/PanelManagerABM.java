@@ -12,7 +12,7 @@ public class PanelManagerABM {
 
     public void armarManagerABM() {
         frame = new JFrame("PacientesABM");
-        frame.setBounds(100, 100, 500, 500);
+        frame.setBounds(650,65,640,360);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         panelListaPacientes = new PanelListaPacientes(this);
         panelListaPacientes.armarPanelListaPacientes();
