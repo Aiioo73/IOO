@@ -1,4 +1,10 @@
 package vista;
+import modelo.Administrativo;
+import modelo.Paciente;
+import modelo.abstractions.Usuario;
+import servicios.AdministrativoService;
+import servicios.PacienteService;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -61,10 +67,39 @@ public class LoginFrame extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String userText;
+        String pwdText;
+        userText = userTextField.getText();
+        pwdText = passwordField.getText();
+
+        // Busco si es un admin
+        AdministrativoService administrativoService = new AdministrativoService();
+        Administrativo administrativo = administrativoService.buscar(userText);
+
+        if (administrativo != null) {
+            if (administrativo.checkPassword(pwdText)) {
+                // PUM Login a la vista de ADMIN
+                return;
+            }
+        }
+
+        // Busco si es un paciente
+        PacienteService pacienteService = new PacienteService();
+        Paciente paciente = pacienteService.buscar(userText);
+
+        if (paciente != null) {
+            if (paciente.checkPassword(pwdText)) {
+                // PUM Login a la vista de PACIENTE
+                return;
+            }
+        }
+
+        // PUMBA ERROR LOGIN
+
         //Coding Part of LOGIN button
         if (e.getSource() == loginButton) {
-            String userText;
-            String pwdText;
+//            String userText;
+//            String pwdText;
             userText = userTextField.getText();
             pwdText = passwordField.getText();
             if (userText.equalsIgnoreCase("usuario") && pwdText.equalsIgnoreCase("12345")) {

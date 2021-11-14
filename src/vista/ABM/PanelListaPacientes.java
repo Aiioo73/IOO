@@ -2,6 +2,7 @@ package vista.ABM;
 
 import modelo.Domicilio;
 import modelo.Paciente;
+import servicios.PacienteService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -9,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class PanelListaPacientes extends JPanel {
 
@@ -50,9 +52,12 @@ public class PanelListaPacientes extends JPanel {
 
         // ------------------------------------------------------------------------//
         //Listado de Pacientes (se debe recuperar del JSON)
-        ArrayList<Paciente> lista = new ArrayList();
-        Domicilio domicilio1 = new Domicilio("Wilde","Las Flores",221);
-        lista.add(new Paciente("Jorge","PEDRITO20","Jorge Sanchez","243221343",domicilio1));
+
+        PacienteService service = new PacienteService();
+        List<Paciente> lista = service.listar();
+
+//        Domicilio domicilio1 = new Domicilio("Wilde","Las Flores",221);
+//        lista.add(new Paciente("Jorge","PEDRITO20","Jorge Sanchez","243221343",domicilio1));
 
         contenidoTable.addColumn("ID");
         contenidoTable.addColumn("Nombre Completo");
