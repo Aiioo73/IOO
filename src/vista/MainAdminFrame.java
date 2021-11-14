@@ -36,7 +36,7 @@ public class MainAdminFrame extends JFrame implements ActionListener {
     public void setPacienteTable(){
         PanelManagerABM panelManager = new PanelManagerABM();
         panelManager.armarManagerABM();
-        panelManager.mostrarPanelLista();
+        panelManager.mostrarPanelListaPacientes();
         panelManager.showFrame();
     }
 

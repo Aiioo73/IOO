@@ -72,6 +72,7 @@ public class PanelListaPacientes extends JPanel {
 
         //Muestro la tabla y el panel:
         add(panelBotonera, BorderLayout.SOUTH);
+        add(scrollPane, BorderLayout.CENTER);
         this.setVisible(true);
 
 
@@ -82,7 +83,7 @@ public class PanelListaPacientes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //llamar al formulario:
-                panelManagerABM.mostrarPanelFormulario();
+                panelManagerABM.mostrarPanelFormularioPacientes();
             }
         });
 
