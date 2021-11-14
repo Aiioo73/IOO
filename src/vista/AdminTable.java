@@ -69,7 +69,7 @@ public class AdminTable extends JPanel {
         //Create and set up the window.
         JFrame frame = new JFrame("Turnos Semanales");
         //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        frame.setBounds(600,180,1280,720);
         //Create and set up the content pane.
         AdminTable newContentPane = new AdminTable();
         newContentPane.setOpaque(true); //content panes must be opaque

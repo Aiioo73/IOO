@@ -16,6 +16,7 @@ public class MainAdminFrame extends JFrame implements ActionListener {
     JButton odontologosButton = new JButton("Odontologos");
     JButton pacienteButton = new JButton("Pacientes");
     JButton adminButton = new JButton("Administradores");
+    JButton turnosButton = new JButton("Turnos Semanales");
     //JCheckBox showPassword = new JCheckBox("Show Password");
 
 
@@ -25,13 +26,12 @@ public class MainAdminFrame extends JFrame implements ActionListener {
         setLocationAndSize();
         addComponentsToContainer();
         addActionEvent();
-        setAdminTable();
+        //setAdminTable();
     }
 
     public void setAdminTable(){
         AdminTable at = new AdminTable();
         at.createAndShowGUI();
-
     }
 
     public void setLayoutManager() {
@@ -42,18 +42,20 @@ public class MainAdminFrame extends JFrame implements ActionListener {
         odontologosButton.setBounds(50, 25, 130, 30);
         pacienteButton.setBounds(180, 25, 130, 30);
         adminButton.setBounds(310, 25, 130, 30);
-
+        turnosButton.setBounds(440, 25, 130, 30);
     }
 
     public void addComponentsToContainer() {
         container.add(odontologosButton);
         container.add(pacienteButton);
         container.add(adminButton);
+        container.add(turnosButton);
     }
 
     public void addActionEvent() {
         odontologosButton.addActionListener(this);
         pacienteButton.addActionListener(this);
+        turnosButton.addActionListener(this);
         //showPassword.addActionListener(this);
     }
 
@@ -63,32 +65,10 @@ public class MainAdminFrame extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         //Coding Part of LOGIN button
-        if (e.getSource() == odontologosButton) {
-            String userText;
-            String pwdText;
-            userText = userTextField.getText();
-            pwdText = passwordField.getText();
-            if (userText.equalsIgnoreCase("usuario") && pwdText.equalsIgnoreCase("12345")) {
-                JOptionPane.showMessageDialog(this, "Login Successful");
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid Username or Password");
-            }
-
+        if (e.getSource() == turnosButton) {
+            setAdminTable();
         }
-        //Coding Part of RESET button
-        if (e.getSource() == pacienteButton) {
-            userTextField.setText("");
-            passwordField.setText("");
-        }
-        //Coding Part of showPassword JCheckBox
-        /*if (e.getSource() == showPassword) {
-            if (showPassword.isSelected()) {
-                passwordField.setEchoChar((char) 0);
-            } else {
-                passwordField.setEchoChar('*');
-            }
 
-        }*/
     }
 
 
