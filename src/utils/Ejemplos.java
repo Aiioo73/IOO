@@ -4,10 +4,7 @@ import modelo.Administrativo;
 import modelo.Odontologo;
 import modelo.Paciente;
 import modelo.Turno;
-import servicios.AdministrativoService;
-import servicios.OdontologoService;
-import servicios.PacienteService;
-import servicios.TurnoService;
+import servicios.*;
 
 import java.util.Date;
 import java.util.List;
@@ -56,5 +53,16 @@ public class Ejemplos {
         Turno turno = new Turno(odontologo, paciente, new Date());
 
         turnoService.guardar(turno);
+    }
+
+    public static void guardarIdUsuarioLogeado(int id) {
+        UsuarioLogeadoService service = UsuarioLogeadoService.obtenerInstancia();
+        service.setIdUsuarioLogeado(id);
+    }
+
+    public static void leerIdUsuarioLogeado() {
+        UsuarioLogeadoService service = UsuarioLogeadoService.obtenerInstancia();
+        System.out.println("El id del usuario logeado es: " + service.getIdUsuarioLogeado());
+
     }
 }
