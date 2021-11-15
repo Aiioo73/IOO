@@ -15,7 +15,7 @@ public class MainAdminFrame extends JFrame implements ActionListener {
     JButton pacienteButton = new JButton("Pacientes");
     JButton adminButton = new JButton("Administradores");
     JButton turnosButton = new JButton("Turnos Semanales");
-    JButton registroTurnoButton = new JButton("Registrar Turno");
+    //JButton registroTurnoButton = new JButton("Registrar Turno");
 
 
 
@@ -58,11 +58,11 @@ public class MainAdminFrame extends JFrame implements ActionListener {
 
 
     public void setLocationAndSize() {
-        registroTurnoButton.setBounds(50, 25, 140, 30);
-        pacienteButton.setBounds(180, 25, 130, 30);
-        adminButton.setBounds(310, 25, 130, 30);
-        odontologosButton.setBounds(440, 25, 130, 30);
-        turnosButton.setBounds(570, 25, 140, 30);
+        //registroTurnoButton.setBounds(50, 25, 140, 30);
+        pacienteButton.setBounds(50, 25, 130, 30);
+        adminButton.setBounds(180, 25, 130, 30);
+        odontologosButton.setBounds(310, 25, 130, 30);
+        turnosButton.setBounds(440, 25, 140, 30);
 
     }
 
@@ -71,7 +71,7 @@ public class MainAdminFrame extends JFrame implements ActionListener {
         container.add(pacienteButton);
         container.add(adminButton);
         container.add(turnosButton);
-        container.add(registroTurnoButton);
+        //container.add(registroTurnoButton);
     }
 
     public void addActionEvent() {
