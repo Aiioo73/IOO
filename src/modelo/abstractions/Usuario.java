@@ -41,6 +41,10 @@ public abstract class Usuario extends Entidad {
         return nombreCompleto;
     }
 
+    public void setFechaAlta(Date fechaAlta) {
+        this.fechaAlta = fechaAlta;
+    }
+
     public String getDni() {
         return dni;
     }

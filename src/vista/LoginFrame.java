@@ -69,53 +69,70 @@ public class LoginFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String userText;
         String pwdText;
-        userText = userTextField.getText();
-        pwdText = passwordField.getText();
+        //userText = userTextField.getText();
+        //pwdText = passwordField.getText();
 
         // Busco si es un admin
-        AdministrativoService administrativoService = new AdministrativoService();
-        Administrativo administrativo = administrativoService.buscar(userText);
+        if (e.getSource() == loginButton) {
+            userText = userTextField.getText();
+            pwdText = passwordField.getText();
+            AdministrativoService administrativoService = new AdministrativoService();
+            Administrativo administrativo = administrativoService.buscar(userText);
 
-        if (administrativo != null) {
-            if (administrativo.checkPassword(pwdText)) {
-                // PUM Login a la vista de ADMIN
-                return;
+            if (administrativo != null) {
+                System.out.println("administ");
+                if (administrativo.checkPassword(pwdText)) {
+                    // PUM Login a la vista de ADMIN
+                    MainAdminFrame mf = new MainAdminFrame();
+                    mf.setTitle("Admin Main");
+                    mf.setVisible(true);
+                    mf.setBounds(500, 65, 1280, 720);
+                    mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    mf.setResizable(false);
+                    return;
+                } else {
+                    JOptionPane.showMessageDialog(this, "Invalid Username or Password");
+                }
+            }
+            // Busco si es un paciente
+            PacienteService pacienteService = new PacienteService();
+            Paciente paciente = pacienteService.buscar(userText);
+
+            if (paciente != null) {
+                if (paciente.checkPassword(pwdText)) {
+                    // PUM Login a la vista de PACIENTE
+                    new MenuPrincipalPacienteFrame();
+                    return;
+                }else{
+                    JOptionPane.showMessageDialog(this, "Invalid Username or Password");
+                }
+            }else{
+                JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }
         }
 
-        // Busco si es un paciente
-        PacienteService pacienteService = new PacienteService();
-        Paciente paciente = pacienteService.buscar(userText);
 
-        if (paciente != null) {
-            if (paciente.checkPassword(pwdText)) {
-                // PUM Login a la vista de PACIENTE
-                return;
-            }
-        }
 
         // PUMBA ERROR LOGIN
 
         //Coding Part of LOGIN button
-        if (e.getSource() == loginButton) {
+        /*if (e.getSource() == loginButton) {
 //            String userText;
 //            String pwdText;
             userText = userTextField.getText();
             pwdText = passwordField.getText();
             if (userText.equalsIgnoreCase("usuario") && pwdText.equalsIgnoreCase("12345")) {
-                /*frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));*/
                 MainAdminFrame mf = new MainAdminFrame();
                 mf.setTitle("Admin Main");
                 mf.setVisible(true);
                 mf.setBounds(500,65,1280,720);
                 mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 mf.setResizable(false);
-                /*JOptionPane.showMessageDialog(this, "Login Successful");*/
             } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }
 
-        }
+        }*/
         //Coding Part of RESET button
         if (e.getSource() == resetButton) {
             userTextField.setText("");
