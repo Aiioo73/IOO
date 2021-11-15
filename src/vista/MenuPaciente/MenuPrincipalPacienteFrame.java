@@ -12,7 +12,7 @@ public class MenuPrincipalPacienteFrame extends JFrame implements ActionListener
     JButton mostrarMisTurnosButton = new JButton("Ver mis turnos");
     JLabel bienvenida = new JLabel("BIENVENIDO");
 
-    MenuPrincipalPacienteFrame() {
+    public MenuPrincipalPacienteFrame() {
         setTitle("Menu Principal Paciente");
 
         bienvenida.setFont(new Font("Arial", Font.PLAIN, 26));

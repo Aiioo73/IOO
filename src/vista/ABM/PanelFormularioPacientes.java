@@ -31,7 +31,8 @@ public class PanelFormularioPacientes extends JPanel {
     private JTextField txtAltura;
     private JTextField txtNombreDeUsuario;
     private JPanel panelComponentes;
-    private int ID = 0 ;
+
+    private Paciente paciente = null;
 
 
     public PanelFormularioPacientes (PanelManagerABM panelManagerABM){
@@ -91,26 +92,42 @@ public class PanelFormularioPacientes extends JPanel {
         btnGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Debo revisar si existe o estoy crean uno nuevo.
+                // Checkear que los campos esten bien
 
+
+
+                // Si el paciente ya existía
+                if (paciente != null) {
+                    paciente.setNombreCompleto(txtNombreCompleto.getText());
+                    paciente.setDni(txtDNI.getText());
+
+                    Domicilio domicilio = new Domicilio();
+                    domicilio.setLocalidad(txtLocalidad.getText());
+                    domicilio.setCalle(txtcalle.getText());
+                    domicilio.setAltura(Integer.parseInt(txtAltura.getText()));
+                    paciente.setDomicilio(domicilio);
+                    paciente.setNombreUsuario(txtNombreDeUsuario.getText());
+                }
+                // Si no existia creo uno nuevo
+                else {
+                    paciente = new Paciente(
+                            txtNombreDeUsuario.getText(),
+                            "asd",
+                            txtNombreCompleto.getText(),
+                            txtDNI.getText(),
+                            new Domicilio(
+                                    txtLocalidad.getText(),
+                                    txtcalle.getText(),
+                                    Integer.parseInt(txtAltura.getText())
+                            )
+                    );
+
+                }
 
                 //Guardar en Base de datos
-
-                Paciente paciente = new Paciente();
-                paciente.setId(ID);
-                paciente.setNombreCompleto(txtNombreCompleto.getText());
-                paciente.setDni(txtDNI.getText());
-                Domicilio domicilio = new Domicilio();
-                domicilio.setLocalidad(txtLocalidad.getText());
-                domicilio.setCalle(txtcalle.getText());
-                domicilio.setAltura(Integer.parseInt(txtAltura.getText()));
-                paciente.setDomicilio(domicilio);
-                paciente.setNombreUsuario(txtNombreDeUsuario.getText());
-
-
                 PacienteService pacienteService = new PacienteService();
                 pacienteService.guardar(paciente);
-
+                limpiarFormulario();
                 System.out.println("Se grabo en la base de datos");
                 JOptionPane.showMessageDialog(panelComponentes,"Se guardaron los datos del Paciente","Alta de Paciente",JOptionPane.INFORMATION_MESSAGE);
                 panelManagerABM.mostrarPanelListaPacientes();
@@ -130,7 +147,9 @@ public class PanelFormularioPacientes extends JPanel {
 
     //Necesito llenar el formulario para cuando quieran modificar algo:
     public void llenarFormulario(Paciente paciente){
-        ID = paciente.getId();
+
+        paciente = paciente;
+
         txtNombreCompleto.setText(paciente.getNombreCompleto());
         txtDNI.setText(paciente.getDni());
         txtLocalidad.setText(paciente.getDomicilio().getLocalidad());
@@ -139,6 +158,15 @@ public class PanelFormularioPacientes extends JPanel {
         txtAltura.setText(Altura);
         txtNombreDeUsuario.setText(paciente.getNombreUsuario());
 
+    }
+
+    public void limpiarFormulario() {
+        txtNombreCompleto.removeAll();
+        txtAltura.removeAll();
+        txtcalle.removeAll();
+        txtDNI.removeAll();
+        txtLocalidad.removeAll();
+        txtNombreDeUsuario.removeAll();
     }
 
 

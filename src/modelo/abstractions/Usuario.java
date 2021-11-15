@@ -30,7 +30,7 @@ public abstract class Usuario extends Entidad {
 
     public boolean checkPassword(String psswd){
         String md5 = StringUtils.getMD5(psswd);
-        return password == md5;
+        return password.equals(md5);
     }
 
     public String getNombreUsuario() {

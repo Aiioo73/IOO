@@ -4,6 +4,7 @@ import modelo.Paciente;
 import modelo.abstractions.Usuario;
 import servicios.AdministrativoService;
 import servicios.PacienteService;
+import vista.MenuPaciente.MenuPrincipalPacienteFrame;
 
 import javax.swing.*;
 import java.awt.*;

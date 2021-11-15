@@ -9,7 +9,7 @@ public class Odontologo extends Usuario {
     private int horaSalida;
 
     public Odontologo() {
-
+        this.setFechaAlta(new Date());
     }
 
     public int getHoraEntrada() {
