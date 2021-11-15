@@ -1,9 +1,7 @@
 package vista.ABM;
 
 import modelo.Administrativo;
-import modelo.Paciente;
 import servicios.AdministrativoService;
-import servicios.PacienteService;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -31,10 +29,14 @@ public class PanelListaAdministrativos extends JPanel {
 
     public void armarPanelListaAdministrativos() {
 
+        this.removeAll();
+
+        this.setLayout(new BorderLayout());
+
         //Botonera
-        btnAlta = new JButton("Crear Usuario");
-        btnBaja = new JButton("Eliminar Usuario");
-        btnModificar = new JButton("Modificar Usuario");
+        btnAlta = new JButton("Crear Usuario Administrativo");
+        btnBaja = new JButton("Eliminar Usuario Administrativo");
+        btnModificar = new JButton("Modificar Usuario Administrativo");
         panelBotonera = new JPanel();
         panelBotonera.add(btnAlta);
         panelBotonera.add(btnBaja);
@@ -52,20 +54,28 @@ public class PanelListaAdministrativos extends JPanel {
         List<Administrativo> lista = service.listar();
         contenidoTable.addColumn("ID");
         contenidoTable.addColumn("Nombre Completo");
+        contenidoTable.addColumn("Nombre de Usuario");
+        contenidoTable.addColumn("DNI");
         contenidoTable.addColumn("Fecha de Alta");
         for (Administrativo administrativo : lista) {
-            Object[] row = new Object[3];
+
+            Object[] row = new Object[5];
             row[0] = administrativo.getId();
             row[1] = administrativo.getNombreCompleto();
-            row[2] = administrativo.getFechaAlta();
+            row[2] = administrativo.getNombreUsuario();
+            row[3] = administrativo.getDni();
+            row[4] = administrativo.getFechaAlta();
 
             contenidoTable.addRow(row);
+
         }
 
         //Muestro la tabla y el panel:
         add(panelBotonera, BorderLayout.SOUTH);
         add(scrollPane, BorderLayout.CENTER);
         this.setVisible(true);
+
+
 
 
         //Eventos
@@ -88,6 +98,7 @@ public class PanelListaAdministrativos extends JPanel {
                 service.eliminar(id);
                 JOptionPane.showMessageDialog(tableAdministrativos,"El usuario Administrativo fue Eliminado correctamente!","Baja de usuario",JOptionPane.INFORMATION_MESSAGE);
                 panelManagerABM.mostrarPanelListaAdministrativos();
+
             }
         });
 
@@ -95,10 +106,9 @@ public class PanelListaAdministrativos extends JPanel {
         btnModificar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Llamar al formulario de Modificaciones.
-                //Necesito obtener datos del paciente para poder rellenar el formulario, como los consulto?
-
-                //panelManagerABM.mostrarPanelFormulario(paciente);
+                String obtenerID = tableAdministrativos.getValueAt(tableAdministrativos.getSelectedRow(),0).toString();
+                int id = Integer.valueOf(obtenerID);
+                panelManagerABM.mostrarPanelFormularioAdministrativos(service.buscar(id));
             }
         });
 

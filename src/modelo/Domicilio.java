@@ -4,14 +4,18 @@ public class Domicilio {
     private String localidad;
     private String calle;
     private int altura;
-    private int piso;
-    private String departamento;
+
 
     public Domicilio(String localidad, String calle, int altura) {
         this.localidad = localidad;
         this.calle = calle;
         this.altura = altura;
     }
+
+    public Domicilio() {
+
+    }
+
 
     public String getLocalidad() {
         return localidad;

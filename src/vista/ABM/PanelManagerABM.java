@@ -17,8 +17,8 @@ public class PanelManagerABM {
     private PanelFormularioAdministrativos panelFormularioAdministrativos;
 
     public void armarManagerABM() {
-        frame = new JFrame("PacientesABM");
-        frame.setBounds(650,65,640,360);
+        frame = new JFrame("Panel para el ABM de Usuarios del Sistema");
+        frame.setBounds(650,65,740,460);
 
         panelListaPacientes = new PanelListaPacientes(this);
         panelListaPacientes.armarPanelListaPacientes();
@@ -43,6 +43,7 @@ public class PanelManagerABM {
     // ----------------- Paneles para Pacientes ----------------
     public void mostrarPanelListaPacientes() {
         frame.getContentPane().removeAll();
+        panelListaPacientes.armarPanelListaPacientes();
         frame.getContentPane().add(panelListaPacientes);
         frame.getContentPane().validate();
         frame.getContentPane().repaint();
@@ -50,6 +51,7 @@ public class PanelManagerABM {
 
     public void mostrarPanelFormularioPacientes() {
         frame.getContentPane().removeAll();
+        panelFormularioPacientes.ArmarPanelFormulario();
         frame.getContentPane().add(panelFormularioPacientes);
         frame.getContentPane().validate();
         frame.getContentPane().repaint();
@@ -57,8 +59,10 @@ public class PanelManagerABM {
     }
     //Debo sobrecargarlo para poder recuperar un Paciente y mostrarlo al momento de "modificar".
     public void mostrarPanelFormularioPacientes(Paciente paciente){
-        panelFormularioPacientes.llenarFormulario(paciente);
+
         frame.getContentPane().removeAll();
+        panelFormularioPacientes.ArmarPanelFormulario();
+        panelFormularioPacientes.llenarFormulario(paciente);
         frame.getContentPane().add(panelFormularioPacientes);
         frame.getContentPane().validate();
         frame.getContentPane().repaint();
@@ -70,6 +74,7 @@ public class PanelManagerABM {
 
     public void mostrarPanelListaOdontologos() {
         frame.getContentPane().removeAll();
+        panelListaOdontologos.armarPanelListaOdontologos();
         frame.getContentPane().add(panelListaOdontologos);
         frame.getContentPane().validate();
         frame.getContentPane().repaint();
@@ -77,6 +82,7 @@ public class PanelManagerABM {
 
     public void mostrarPanelFormularioOdontologos() {
         frame.getContentPane().removeAll();
+        panelFormularioOdontologos.armarPanelFormulario();
         frame.getContentPane().add(panelFormularioOdontologos);
         frame.getContentPane().validate();
         frame.getContentPane().repaint();
@@ -84,18 +90,21 @@ public class PanelManagerABM {
     }
     //Debo sobrecargarlo para poder recuperar un Paciente y mostrarlo al momento de "modificar".
     public void mostrarPanelFormularioOdontologos(Odontologo odontologo){
-        panelFormularioOdontologos.llenarFormulario(odontologo);
+
         frame.getContentPane().removeAll();
+        panelFormularioOdontologos.armarPanelFormulario();
+        panelFormularioOdontologos.llenarFormulario(odontologo);
         frame.getContentPane().add(panelFormularioOdontologos);
         frame.getContentPane().validate();
         frame.getContentPane().repaint();
 
     }
 
-    // ----------------- Paneles para  ----------------
+    // ----------------- Paneles para Administrativos ----------------
 
     public void mostrarPanelListaAdministrativos() {
         frame.getContentPane().removeAll();
+        panelListaAdministrativos.armarPanelListaAdministrativos();
         frame.getContentPane().add(panelListaAdministrativos);
         frame.getContentPane().validate();
         frame.getContentPane().repaint();
@@ -104,14 +113,17 @@ public class PanelManagerABM {
 
     public void mostrarPanelFormularioAdministrativos() {
         frame.getContentPane().removeAll();
+        panelFormularioAdministrativos.ArmarPanelFormulario();
         frame.getContentPane().add(panelFormularioAdministrativos);
         frame.getContentPane().validate();
         frame.getContentPane().repaint();
     }
 
     public void mostrarPanelFormularioAdministrativos(Administrativo administrativo) {
-        panelFormularioAdministrativos.llenarFormulario(administrativo);
+
         frame.getContentPane().removeAll();
+        panelFormularioAdministrativos.ArmarPanelFormulario();
+        panelFormularioAdministrativos.llenarFormulario(administrativo);
         frame.getContentPane().add(panelFormularioAdministrativos);
         frame.getContentPane().validate();
         frame.getContentPane().repaint();

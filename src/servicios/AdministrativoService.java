@@ -19,6 +19,7 @@ public class AdministrativoService implements IService<Administrativo> {
         dao.guardar(entity);
     }
 
+
     @Override
     public Administrativo buscar(int id) {
         return dao.buscar(id);

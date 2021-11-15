@@ -1,6 +1,5 @@
 package vista.ABM;
 
-import modelo.Domicilio;
 import modelo.Paciente;
 import servicios.PacienteService;
 
@@ -9,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 public class PanelListaPacientes extends JPanel {
@@ -31,6 +29,8 @@ public class PanelListaPacientes extends JPanel {
 
     public void armarPanelListaPacientes(){
 
+        this.removeAll();
+
         this.setLayout(new BorderLayout());
 
         //Botonera
@@ -51,23 +51,22 @@ public class PanelListaPacientes extends JPanel {
         scrollPane.setViewportView(tablePacientes);
 
         // ------------------------------------------------------------------------//
-        //Listado de Pacientes (se debe recuperar del JSON)
-
         PacienteService service = new PacienteService();
         List<Paciente> lista = service.listar();
 
-//        Domicilio domicilio1 = new Domicilio("Wilde","Las Flores",221);
-//        lista.add(new Paciente("Jorge","PEDRITO20","Jorge Sanchez","243221343",domicilio1));
-
         contenidoTable.addColumn("ID");
         contenidoTable.addColumn("Nombre Completo");
+        contenidoTable.addColumn("Nombre de Usuario");
+        contenidoTable.addColumn("DNI");
         contenidoTable.addColumn("Fecha de Alta");
 
         for(Paciente paciente : lista){
-            Object[] row = new Object[3];
+            Object[] row = new Object[5];
             row[0] = paciente.getId();
             row[1] = paciente.getNombreCompleto();
-            row[2] = paciente.getFechaAlta();
+            row[2] = paciente.getNombreUsuario();
+            row[3] = paciente.getDni();
+            row[4] = paciente.getFechaAlta();
 
             contenidoTable.addRow(row);
         }
@@ -79,6 +78,7 @@ public class PanelListaPacientes extends JPanel {
         add(panelBotonera, BorderLayout.SOUTH);
         add(scrollPane, BorderLayout.CENTER);
         this.setVisible(true);
+
 
 
 
@@ -103,8 +103,7 @@ public class PanelListaPacientes extends JPanel {
                 int id = Integer.valueOf(obtenerID);
                 service.eliminar(id);
                 JOptionPane.showMessageDialog(tablePacientes,"El Paciente fue Eliminado correctamente!","Baja de Paciente",JOptionPane.INFORMATION_MESSAGE);
-                tablePacientes.removeAll();
-                tablePacientes.repaint();
+                panelManagerABM.mostrarPanelListaPacientes();
            }
         });
 
@@ -112,10 +111,12 @@ public class PanelListaPacientes extends JPanel {
         btnModificar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Llamar al formulario de Modificaciones.
-                //Necesito obtener datos del paciente para poder rellenar el formulario, como los consulto?
+                String obtenerID = tablePacientes.getValueAt(tablePacientes.getSelectedRow(),0).toString();
+                int id = Integer.valueOf(obtenerID);
+                PacienteService pacienteService = new PacienteService();
+                panelManagerABM.mostrarPanelFormularioPacientes(pacienteService.buscar(id));
 
-                //panelManagerABM.mostrarPanelFormulario(paciente);
+                //No está funcionando, está creando un nuevo ID.
             }
         });
 

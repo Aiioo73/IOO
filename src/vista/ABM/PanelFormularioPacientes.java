@@ -1,6 +1,8 @@
 package vista.ABM;
 
+import modelo.Domicilio;
 import modelo.Paciente;
+import servicios.PacienteService;
 import utils.SpringUtilities;
 
 import javax.swing.*;
@@ -37,6 +39,8 @@ public class PanelFormularioPacientes extends JPanel {
 
 
     public void ArmarPanelFormulario(){
+
+
         setLayout(new BorderLayout());
 
         btnGuardar = new JButton("Guardar");
@@ -86,9 +90,27 @@ public class PanelFormularioPacientes extends JPanel {
         btnGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                //Debo revisar si existe o estoy crean uno nuevo.
+
+
                 //Guardar en Base de datos
+
+                Paciente paciente = new Paciente();
+                paciente.setNombreCompleto(txtNombreCompleto.getText());
+                paciente.setDni(txtDNI.getText());
+                Domicilio domicilio = new Domicilio();
+                domicilio.setLocalidad(txtLocalidad.getText());
+                domicilio.setCalle(txtcalle.getText());
+                domicilio.setAltura(Integer.parseInt(txtAltura.getText()));
+                paciente.setDomicilio(domicilio);
+                paciente.setNombreUsuario(txtNombreDeUsuario.getText());
+
+
+                PacienteService pacienteService = new PacienteService();
+                pacienteService.guardar(paciente);
+
                 System.out.println("Se grabo en la base de datos");
-                JOptionPane.showMessageDialog(panelComponentes,"El Paciente fue creado correctamente!","Alta de Paciente",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(panelComponentes,"Se guardaron los datos del Paciente","Alta de Paciente",JOptionPane.INFORMATION_MESSAGE);
                 panelManagerABM.mostrarPanelListaPacientes();
             }
         });
@@ -108,7 +130,12 @@ public class PanelFormularioPacientes extends JPanel {
     public void llenarFormulario(Paciente paciente){
         txtNombreCompleto.setText(paciente.getNombreCompleto());
         txtDNI.setText(paciente.getDni());
+        txtLocalidad.setText(paciente.getDomicilio().getLocalidad());
+        txtcalle.setText(paciente.getDomicilio().getCalle());
+        String Altura = Integer.valueOf(paciente.getDomicilio().getAltura()).toString();
+        txtAltura.setText(Altura);
         txtNombreDeUsuario.setText(paciente.getNombreUsuario());
+
     }
 
 

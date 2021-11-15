@@ -1,6 +1,8 @@
 package vista.ABM;
 
 import modelo.Administrativo;
+import modelo.Domicilio;
+import servicios.AdministrativoService;
 import utils.SpringUtilities;
 
 import javax.swing.*;
@@ -36,6 +38,8 @@ public class PanelFormularioAdministrativos extends JPanel {
     }
 
     public void ArmarPanelFormulario(){
+
+        setLayout(new BorderLayout());
 
         btnGuardar = new JButton("Guardar");
         btnCancelar = new JButton("Cancelar");
@@ -80,12 +84,33 @@ public class PanelFormularioAdministrativos extends JPanel {
         add(panelBotonera, BorderLayout.SOUTH);
         add(panelComponentes, BorderLayout.CENTER);
 
+
+
         btnGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Guardar en Base de datos
+                Administrativo administrativo = new Administrativo();
+                administrativo.setNombreCompleto(txtNombreCompleto.getText());
+                administrativo.setDni(txtDNI.getText());
+
+                Domicilio domicilio = new Domicilio();
+                domicilio.setLocalidad(txtLocalidad.getText());
+                domicilio.setCalle(txtcalle.getText());
+                domicilio.setAltura(Integer.parseInt(txtAltura.getText()));
+                administrativo.setDomicilio(domicilio);
+
+                administrativo.setNombreUsuario(txtNombreDeUsuario.getText());
+
+
+                AdministrativoService administrativoService = new AdministrativoService();
+                administrativoService.guardar(administrativo);
+
+
+
+
                 System.out.println("Se grabo en la base de datos");
-                JOptionPane.showMessageDialog(panelComponentes,"El Administrativo fue creado correctamente!","Alta de Administrativo",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(panelComponentes,"Se guardaron los datos del Administrativo","Alta de Administrativo",JOptionPane.INFORMATION_MESSAGE);
                 panelManagerABM.mostrarPanelListaAdministrativos();
             }
         });
@@ -103,6 +128,10 @@ public class PanelFormularioAdministrativos extends JPanel {
     public void llenarFormulario(Administrativo administrativo) {
         txtNombreCompleto.setText(administrativo.getNombreCompleto());
         txtDNI.setText(administrativo.getDni());
+        txtLocalidad.setText(administrativo.getDomicilio().getLocalidad());
+        txtcalle.setText(administrativo.getDomicilio().getCalle());
+        String Altura = Integer.valueOf(administrativo.getDomicilio().getAltura()).toString();
+        txtAltura.setText(Altura);
         txtNombreDeUsuario.setText(administrativo.getNombreUsuario());
     }
 }

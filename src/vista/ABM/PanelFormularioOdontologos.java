@@ -1,7 +1,8 @@
 package vista.ABM;
 
+import modelo.Domicilio;
 import modelo.Odontologo;
-import modelo.Paciente;
+import servicios.OdontologoService;
 import utils.SpringUtilities;
 
 import javax.swing.*;
@@ -37,6 +38,7 @@ public class PanelFormularioOdontologos extends JPanel {
     }
 
     public void armarPanelFormulario(){
+
         setLayout(new BorderLayout());
 
         btnGuardar = new JButton("Guardar");
@@ -89,8 +91,26 @@ public class PanelFormularioOdontologos extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Guardar en Base de datos
+
+                Odontologo odontologo = new Odontologo();
+                odontologo.setNombreCompleto(txtNombreCompleto.getText());
+                odontologo.setDni(txtDNI.getText());
+
+                Domicilio domicilio = new Domicilio();
+                domicilio.setLocalidad(txtLocalidad.getText());
+                domicilio.setCalle(txtcalle.getText());
+                domicilio.setAltura(Integer.parseInt(txtAltura.getText()));
+                odontologo.setDomicilio(domicilio);
+
+                odontologo.setNombreUsuario(txtNombreDeUsuario.getText());
+
+
+                OdontologoService odontologoService = new OdontologoService();
+                odontologoService.guardar(odontologo);
+
+
                 System.out.println("Se grabo en la base de datos");
-                JOptionPane.showMessageDialog(panelComponentes,"El Odontologo fue creado correctamente!","Alta de Odontologo",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(panelComponentes,"Se guardaron los datos del Odontologo","Alta de Odontologo",JOptionPane.INFORMATION_MESSAGE);
                 panelManagerABM.mostrarPanelListaOdontologos();
             }
         });
@@ -110,7 +130,13 @@ public class PanelFormularioOdontologos extends JPanel {
     public void llenarFormulario(Odontologo odontologo){
         txtNombreCompleto.setText(odontologo.getNombreCompleto());
         txtDNI.setText(odontologo.getDni());
+        txtLocalidad.setText(odontologo.getDomicilio().getLocalidad());
+        txtcalle.setText(odontologo.getDomicilio().getCalle());
+        String Altura = Integer.valueOf(odontologo.getDomicilio().getAltura()).toString();
+        txtAltura.setText(Altura);
         txtNombreDeUsuario.setText(odontologo.getNombreUsuario());
+
+
     }
 
 

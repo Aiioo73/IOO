@@ -6,6 +6,10 @@ public class Odontologo extends Usuario {
     private int horaEntrada;
     private int horaSalida;
 
+    public Odontologo() {
+
+    }
+
     public int getHoraEntrada() {
         return horaEntrada;
     }

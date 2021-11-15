@@ -1,10 +1,14 @@
 package vista.ABM;
 
+import modelo.Odontologo;
+import servicios.OdontologoService;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class PanelListaOdontologos extends JPanel {
 
@@ -25,12 +29,13 @@ public class PanelListaOdontologos extends JPanel {
 
     public void armarPanelListaOdontologos(){
 
+        this.removeAll();
         this.setLayout(new BorderLayout());
 
         //Botonera
-        btnAlta = new JButton("Crear Usuario");
-        btnBaja = new JButton("Eliminar Usuario");
-        btnModificar = new JButton("Modificar Usuario");
+        btnAlta = new JButton("Crear Odontologo");
+        btnBaja = new JButton("Eliminar Odontologo");
+        btnModificar = new JButton("Modificar Odontologo");
         panelBotonera = new JPanel();
         panelBotonera.add(btnAlta);
         panelBotonera.add(btnBaja);
@@ -43,6 +48,28 @@ public class PanelListaOdontologos extends JPanel {
         tableOdontologos = new JTable(contenidoTable);
         //Agrego la tabla de Odontologos al ScrollPane:
         scrollPane.setViewportView(tableOdontologos);
+
+        OdontologoService service = new OdontologoService();
+        List<Odontologo> lista = service.listar();
+
+        contenidoTable.addColumn("Legajo");
+        contenidoTable.addColumn("Nombre Completo");
+        contenidoTable.addColumn("Nombre de Usuario");
+        contenidoTable.addColumn("Hora Entrada");
+        contenidoTable.addColumn("Hora Salida");
+        contenidoTable.addColumn("Fecha de Alta");
+
+        for(Odontologo odontologo : lista){
+            Object[] row = new Object[6];
+            row[0] = odontologo.getId();
+            row[1] = odontologo.getNombreCompleto();
+            row[2] = odontologo.getNombreUsuario();
+            row[3] = odontologo.getHoraEntrada();
+            row[4] = odontologo.getHoraSalida();
+            row[5] = odontologo.getFechaAlta();
+
+            contenidoTable.addRow(row);
+        }
 
 
         //Muestro la tabla y el panel:
@@ -60,6 +87,31 @@ public class PanelListaOdontologos extends JPanel {
             }
         });
 
+        btnBaja.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Obtengo el valor del ID para poder saber que valor elimino del JSON
+
+                String obtenerID = tableOdontologos.getValueAt(tableOdontologos.getSelectedRow(),0).toString();
+                System.out.println(obtenerID);
+                int id = Integer.valueOf(obtenerID);
+                OdontologoService service = new OdontologoService();
+                service.eliminar(id);
+                JOptionPane.showMessageDialog(tableOdontologos,"El Odontologo fue Eliminado correctamente!","Baja de Odontologo",JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+
+        btnModificar.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String obtenerID = tableOdontologos.getValueAt(tableOdontologos.getSelectedRow(),0).toString();
+                int id = Integer.valueOf(obtenerID);
+                OdontologoService service = new OdontologoService();
+                panelManagerABM.mostrarPanelFormularioOdontologos(service.buscar(id));
+
+            }
+        });
     }
 
 
