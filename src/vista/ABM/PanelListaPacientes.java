@@ -97,18 +97,15 @@ public class PanelListaPacientes extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Obtengo el valor del ID para poder saber que valor elimino del JSON
-                
-/*                System.out.println(tablePacientes.getValueAt(tablePacientes.getSelectedRow(),0));
-                String eliminarPaciente = tablePacientes.getValueAt(tablePacientes.getSelectedRow(),0).toString();
 
-                int var=JOptionPane.showConfirmDialog(this,"¿Estas Seguro que deseas Eliminar el Paciente" + eliminarPaciente + "?","",JOptionPane.YES_NO_OPTION);
-
-                if( var == JOptionPane.YES_OPTION){
-                    //Eliminar de la base
-                }else{
-                    panelManagerABM.mostrarPanelLista();
-                }
-*/            }
+                String obtenerID = tablePacientes.getValueAt(tablePacientes.getSelectedRow(),0).toString();
+                System.out.println(obtenerID);
+                int id = Integer.valueOf(obtenerID);
+                service.eliminar(id);
+                JOptionPane.showMessageDialog(tablePacientes,"El Paciente fue Eliminado correctamente!","Baja de Paciente",JOptionPane.INFORMATION_MESSAGE);
+                tablePacientes.removeAll();
+                tablePacientes.repaint();
+           }
         });
 
 
