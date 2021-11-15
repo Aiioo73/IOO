@@ -82,17 +82,13 @@ public class PanelListaAdministrativos extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 //Obtengo el valor del ID para poder saber que valor elimino del JSON
 
-/*                System.out.println(tablePacientes.getValueAt(tablePacientes.getSelectedRow(),0));
-                String eliminarPaciente = tablePacientes.getValueAt(tablePacientes.getSelectedRow(),0).toString();
-
-                int var=JOptionPane.showConfirmDialog(this,"¿Estas Seguro que deseas Eliminar el Paciente" + eliminarPaciente + "?","",JOptionPane.YES_NO_OPTION);
-
-                if( var == JOptionPane.YES_OPTION){
-                    //Eliminar de la base
-                }else{
-                    panelManagerABM.mostrarPanelLista();
-                }
-*/            }
+                String obtenerID = tableAdministrativos.getValueAt(tableAdministrativos.getSelectedRow(),0).toString();
+                System.out.println(obtenerID);
+                int id = Integer.valueOf(obtenerID);
+                service.eliminar(id);
+                JOptionPane.showMessageDialog(tableAdministrativos,"El usuario Administrativo fue Eliminado correctamente!","Baja de usuario",JOptionPane.INFORMATION_MESSAGE);
+                panelManagerABM.mostrarPanelListaAdministrativos();
+            }
         });
 
 
