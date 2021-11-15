@@ -1,6 +1,7 @@
-package vista;
+package vista.MenuPaciente;
 
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,11 +40,16 @@ public class MenuPrincipalPacienteFrame extends JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == registrarUnTurnoButton) {
-            new ComboOdontologosFrame();
-
+            new RegistroTurnosFrame();
         }
         if (e.getSource() == mostrarMisTurnosButton) {
+            /*
+             * if(TENGO TURNOS ASIGNADOS){ new MostrarTurnosFrame(); }else{
+             * JOptionPane.showMessageDialog(this, "No tiene turnos asignados"); }
+             */
             JOptionPane.showMessageDialog(this, "No tiene turnos asignados");
+            new MostrarTurnosFrame();
+
         }
 
     }
