@@ -94,8 +94,6 @@ public class PanelFormularioPacientes extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // Checkear que los campos esten bien
 
-
-
                 // Si el paciente ya existía
                 if (paciente != null) {
                     paciente.setNombreCompleto(txtNombreCompleto.getText());
@@ -148,7 +146,7 @@ public class PanelFormularioPacientes extends JPanel {
     //Necesito llenar el formulario para cuando quieran modificar algo:
     public void llenarFormulario(Paciente paciente){
 
-        paciente = paciente;
+        this.paciente = paciente;
 
         txtNombreCompleto.setText(paciente.getNombreCompleto());
         txtDNI.setText(paciente.getDni());
