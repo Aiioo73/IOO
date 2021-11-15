@@ -31,6 +31,7 @@ public class PanelFormularioPacientes extends JPanel {
     private JTextField txtAltura;
     private JTextField txtNombreDeUsuario;
     private JPanel panelComponentes;
+    private int ID = 0 ;
 
 
     public PanelFormularioPacientes (PanelManagerABM panelManagerABM){
@@ -96,6 +97,7 @@ public class PanelFormularioPacientes extends JPanel {
                 //Guardar en Base de datos
 
                 Paciente paciente = new Paciente();
+                paciente.setId(ID);
                 paciente.setNombreCompleto(txtNombreCompleto.getText());
                 paciente.setDni(txtDNI.getText());
                 Domicilio domicilio = new Domicilio();
@@ -128,6 +130,7 @@ public class PanelFormularioPacientes extends JPanel {
 
     //Necesito llenar el formulario para cuando quieran modificar algo:
     public void llenarFormulario(Paciente paciente){
+        ID = paciente.getId();
         txtNombreCompleto.setText(paciente.getNombreCompleto());
         txtDNI.setText(paciente.getDni());
         txtLocalidad.setText(paciente.getDomicilio().getLocalidad());
