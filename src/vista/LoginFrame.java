@@ -79,7 +79,15 @@ public class LoginFrame extends JFrame implements ActionListener {
         if (administrativo != null) {
             if (administrativo.checkPassword(pwdText)) {
                 // PUM Login a la vista de ADMIN
+                MainAdminFrame mf = new MainAdminFrame();
+                mf.setTitle("Admin Main");
+                mf.setVisible(true);
+                mf.setBounds(500,65,1280,720);
+                mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                mf.setResizable(false);
                 return;
+            }else {
+                JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }
         }
 
@@ -90,8 +98,13 @@ public class LoginFrame extends JFrame implements ActionListener {
         if (paciente != null) {
             if (paciente.checkPassword(pwdText)) {
                 // PUM Login a la vista de PACIENTE
+                new MenuPrincipalPacienteFrame();
                 return;
+            }else{
+                JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }
+        }else{
+            JOptionPane.showMessageDialog(this, "Invalid Username or Password");
         }
 
         // PUMBA ERROR LOGIN
