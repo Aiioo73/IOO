@@ -44,6 +44,7 @@ public class BaseDAOArchivo<T extends Entidad> implements IDAO<T>{
                     lista.remove(p);
                     //Agrego el nuevo
                     lista.add(entity);
+                    break;
                 }
             }
         }

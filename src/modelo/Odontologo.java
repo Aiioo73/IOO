@@ -6,6 +6,22 @@ public class Odontologo extends Usuario {
     private int horaEntrada;
     private int horaSalida;
 
+    public int getHoraEntrada() {
+        return horaEntrada;
+    }
+
+    public void setHoraEntrada(int horaEntrada) {
+        this.horaEntrada = horaEntrada;
+    }
+
+    public int getHoraSalida() {
+        return horaSalida;
+    }
+
+    public void setHoraSalida(int horaSalida) {
+        this.horaSalida = horaSalida;
+    }
+
     public Odontologo(
             String nombreUsuario,
             String passwordHash,

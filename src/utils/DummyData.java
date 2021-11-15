@@ -11,26 +11,24 @@ import java.util.List;
 public class DummyData {
     public static List<Paciente> generarPacientes() {
         List<Paciente> lista = new ArrayList<>();
-        lista.add(new Paciente(
+
+        Paciente paciente1 = new Paciente(
                 "lwhitney",
                 "password",
                 "Whitney Laurel",
                 "12312312",
                 new Domicilio("Brooklyn", "Briercliff Road", 3984)
-        ));
-        lista.add(new Paciente(
-                "lwhitney",
-                "password",
-                "Whitney Laurel",
-                "12312312",
-                new Domicilio("Brooklyn", "Briercliff Road", 3984)
-        ));
+        );
+
+
+        lista.add(paciente1);
         return lista;
     }
 
     public static List<Odontologo> generarOdontologos() {
         List<Odontologo> lista = new ArrayList<>();
-        lista.add(new Odontologo(
+
+        Odontologo odontologo1 = new Odontologo(
                 "lwhitney",
                 "password",
                 "Whitney Laurel",
@@ -38,28 +36,26 @@ public class DummyData {
                 new Domicilio("Brooklyn", "Briercliff Road", 3984),
                 9,
                 18
-        ));
-        lista.add(new Odontologo(
-                "lwhitney",
-                "password",
-                "Whitney Laurel 2",
-                "12312312",
-                new Domicilio("Brooklyn", "Briercliff Road", 3984),
-                10,
-                14
-        ));
+        );
+
+
+        lista.add(odontologo1);
         return lista;
     }
 
     public static List<Administrativo> generarAdministrativos() {
         List<Administrativo> lista = new ArrayList<>();
-        lista.add(new Administrativo(
+
+        Administrativo administrativo1 = new Administrativo(
                 "admin",
                 "admin",
                 "Admin Guy",
                 "12312312",
                 new Domicilio("Brooklyn", "Briercliff Road", 3984)
-        ));
+        );
+
+
+        lista.add(administrativo1);
         return lista;
     }
 }
