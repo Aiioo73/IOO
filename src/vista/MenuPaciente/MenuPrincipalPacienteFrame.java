@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.text.ParseException;
 
 public class MenuPrincipalPacienteFrame extends JFrame implements ActionListener {
-    JFrame frame;
+    // JFrame frame;
     JButton registrarUnTurnoButton = new JButton("Registrar un turno");
     JButton mostrarMisTurnosButton = new JButton("Ver mis turnos");
     JLabel bienvenida = new JLabel("BIENVENIDO");
