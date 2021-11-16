@@ -2,12 +2,14 @@ package modelo;
 
 import modelo.abstractions.Usuario;
 
+import java.util.Date;
+
 public class Odontologo extends Usuario {
     private int horaEntrada;
     private int horaSalida;
 
     public Odontologo() {
-
+        this.setFechaAlta(new Date());
     }
 
     public int getHoraEntrada() {
@@ -38,6 +40,7 @@ public class Odontologo extends Usuario {
         super(nombreUsuario, passwordHash, nombreCompleto, dni, domicilio);
         this.horaEntrada = horaEntrada;
         this.horaSalida = horaSalida;
+        this.setFechaAlta(new Date());
     }
 
 }

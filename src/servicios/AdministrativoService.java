@@ -29,7 +29,7 @@ public class AdministrativoService implements IService<Administrativo> {
         List<Administrativo> list = dao.listar();
 
         for (Administrativo admin: list) {
-            if (admin.getNombreUsuario() == nombreUsuario) {
+            if (admin.getNombreUsuario().equals(nombreUsuario)) {
                 return admin;
             }
         }

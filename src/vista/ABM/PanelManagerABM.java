@@ -20,6 +20,8 @@ public class PanelManagerABM {
         frame = new JFrame("Panel para el ABM de Usuarios del Sistema");
         frame.setBounds(650,65,740,460);
 
+
+
         panelListaPacientes = new PanelListaPacientes(this);
         panelListaPacientes.armarPanelListaPacientes();
 

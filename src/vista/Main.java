@@ -9,8 +9,6 @@ public class Main {
 
         Ejemplos.generarInfoEjemplo();
         Ejemplos.generarTurno();
-        Ejemplos.guardarIdUsuarioLogeado(123);
-        Ejemplos.leerIdUsuarioLogeado();
 
         //Creating object of LoginFrame class and setting some of its properties
         LoginFrame frame=new LoginFrame();

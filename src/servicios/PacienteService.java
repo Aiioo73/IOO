@@ -30,7 +30,7 @@ public class PacienteService implements IService<Paciente> {
         List<Paciente> list = dao.listar();
 
         for (Paciente paciente: list) {
-            if (paciente.getNombreUsuario() == nombreUsuario) {
+            if (paciente.getNombreUsuario().equals(nombreUsuario)) {
                 return paciente;
             }
         }

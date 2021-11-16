@@ -4,6 +4,7 @@ import modelo.Paciente;
 import modelo.abstractions.Usuario;
 import servicios.AdministrativoService;
 import servicios.PacienteService;
+import servicios.UsuarioLogeadoService;
 import vista.MenuPaciente.MenuPrincipalPacienteFrame;
 
 import javax.swing.*;
@@ -83,6 +84,7 @@ public class LoginFrame extends JFrame implements ActionListener {
             if (administrativo != null) {
                 System.out.println("administ");
                 if (administrativo.checkPassword(pwdText)) {
+                    UsuarioLogeadoService.obtenerInstancia().setIdUsuarioLogeado(administrativo.getId());
                     // PUM Login a la vista de ADMIN
                     MainAdminFrame mf = new MainAdminFrame();
                     mf.setTitle("Admin Main");
@@ -90,6 +92,7 @@ public class LoginFrame extends JFrame implements ActionListener {
                     mf.setBounds(500, 65, 1280, 720);
                     mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     mf.setResizable(false);
+                    setVisible(false);
                     return;
                 } else {
                     JOptionPane.showMessageDialog(this, "Invalid Username or Password");
@@ -102,7 +105,9 @@ public class LoginFrame extends JFrame implements ActionListener {
             if (paciente != null) {
                 if (paciente.checkPassword(pwdText)) {
                     // PUM Login a la vista de PACIENTE
+                    UsuarioLogeadoService.obtenerInstancia().setIdUsuarioLogeado(paciente.getId());
                     new MenuPrincipalPacienteFrame();
+                    setVisible(false);
                     return;
                 }else{
                     JOptionPane.showMessageDialog(this, "Invalid Username or Password");
