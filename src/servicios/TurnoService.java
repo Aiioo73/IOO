@@ -48,7 +48,7 @@ public class TurnoService implements IService<Turno> {
 
     public List<Turno> listar(Odontologo odontologo) {
         List<Turno> lista = listar();
-        lista.removeIf(turno -> turno.getDocAsignado() != odontologo);
+        lista.removeIf(turno -> turno.getDocAsignado().getId() != odontologo.getId());
         return lista;
     }
 
@@ -61,12 +61,14 @@ public class TurnoService implements IService<Turno> {
     public List<Date> obtenerDisponibilidad(Odontologo odontologo) {
         List<Date> turnosSemana = obtenerTurnosSemana(odontologo.getHoraEntrada(), odontologo.getHoraSalida());
         List<Date> resultado = new ArrayList<>(turnosSemana);
-        List<Date> turnosOcupados = listar(odontologo).stream().map(Turno::getFechaTurno).collect(Collectors.toList());
-        ;
 
-        for (Date turno : turnosSemana) {
-            if (turnosOcupados.contains(turno)) {
-                resultado.remove(turno);
+        List<Turno> turnosOcupados = listar(odontologo);
+
+        List<Date> fechasOcupadas = turnosOcupados.stream().map(Turno::getFechaTurno).collect(Collectors.toList());
+
+        for (Date fechaTurno : fechasOcupadas) {
+            if (resultado.contains(fechaTurno)) {
+                resultado.remove(fechaTurno);
             }
         }
 

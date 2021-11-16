@@ -61,7 +61,7 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
         setResizable(false);
         setLayout(null);
         setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
         seleccionOdontologo.setBounds(30, 50, 250, 40);
         comboOdontologos.setBounds(290, 50, 250, 35);

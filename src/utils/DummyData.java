@@ -20,8 +20,16 @@ public class DummyData {
                 new Domicilio("Brooklyn", "Briercliff Road", 3984)
         );
 
+        Paciente paciente2 = new Paciente(
+                "paciente",
+                "paciente",
+                "Paciente Fulanito",
+                "99999999",
+                new Domicilio("Brooklyngo", "Wallaby", 1234)
+        );
 
         lista.add(paciente1);
+        lista.add(paciente2);
         return lista;
     }
 
