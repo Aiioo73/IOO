@@ -98,6 +98,7 @@ public class PanelListaOdontologos extends JPanel {
                 OdontologoService service = new OdontologoService();
                 service.eliminar(id);
                 JOptionPane.showMessageDialog(tableOdontologos,"El Odontologo fue Eliminado correctamente!","Baja de Odontologo",JOptionPane.INFORMATION_MESSAGE);
+                panelManagerABM.mostrarPanelListaOdontologos();
             }
         });
 
