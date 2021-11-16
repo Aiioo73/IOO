@@ -30,12 +30,12 @@ public class AdminTable extends JPanel {
         int f = 0;
         int c = 0;
         while (f < listaTurnos.size()){
-            for (int i = 0; i < listaTurnos.size(); i++){
+            for (int i = 0; i < listaTurnos.size(); i++) {
                 data[f][c] = listaTurnos.get(i).getDocAsignado().getNombreCompleto();
                 data[f][c + 1] = listaTurnos.get(i).getPaciente().getNombreCompleto();
                 data[f][c + 2] = listaTurnos.get(i).getFechaTurno().toString().substring(0, listaTurnos.get(i).getFechaTurno().toString().length() - 9);
+                f++;
             }
-            f++;
         }
 
         final JTable table = new JTable(data, columnNames);
