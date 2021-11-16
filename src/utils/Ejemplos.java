@@ -35,23 +35,26 @@ public class Ejemplos {
     }
 
     public static void generarTurno() {
+        TurnoService turnoService = new TurnoService();
+
+        if (!turnoService.listar().isEmpty()) {
+            return;
+        }
+
         OdontologoService odontologoService = new OdontologoService();
 
         Odontologo odontologo = odontologoService.buscar(1);
 
         Paciente paciente = new PacienteService().buscar(1);
 
-        TurnoService turnoService = new TurnoService();
 
         List<Date> turnosDisponiblesOdontologo = turnoService.obtenerDisponibilidad(odontologo);
 
-        for (Date turno: turnosDisponiblesOdontologo) {
-//            System.out.println(odontologo.getNombreCompleto() + " tiene disponible: " + turno);
+        for (int i = 0; i < 5; i++) {
+            System.out.println("Turno: " + turnosDisponiblesOdontologo.get(i + 1));
+            Turno turno = new Turno(odontologo, paciente, turnosDisponiblesOdontologo.get(i + 1));
+            turnoService.guardar(turno);
         }
-
-        Turno turno = new Turno(odontologo, paciente, new Date());
-
-        turnoService.guardar(turno);
     }
 
     public static void guardarIdUsuarioLogeado(int id) {
