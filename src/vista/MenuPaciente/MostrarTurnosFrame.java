@@ -24,6 +24,7 @@ public class MostrarTurnosFrame extends JFrame implements ActionListener {
     JLabel titulo;
     JButton salir = new JButton("Salir");
     public TurnoService listaTurnos = new TurnoService();
+    JScrollPane scroll = new JScrollPane(txtsub);
 
     public MostrarTurnosFrame() throws ParseException {
         super("Mis turnos");
@@ -35,6 +36,7 @@ public class MostrarTurnosFrame extends JFrame implements ActionListener {
         container.setLayout(null);
         container.add(titulo);
         container.add(txtsub);
+        container.add(scroll);
         container.add(salir);
 
         setSize(600, 450);
