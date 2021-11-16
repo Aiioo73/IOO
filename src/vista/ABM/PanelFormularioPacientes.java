@@ -16,6 +16,7 @@ public class PanelFormularioPacientes extends JPanel {
 
     private JButton btnGuardar;
     private JButton btnCancelar;
+
     private JPanel panelBotonera;
 
     private JLabel lblNombreCompleto;
@@ -24,12 +25,16 @@ public class PanelFormularioPacientes extends JPanel {
     private JLabel lblcalle;
     private JLabel lblAltura;
     private JLabel lblNombreDeUsuario;
+    private JLabel lblContraseña;
+
     private JTextField txtNombreCompleto;
     private JTextField txtDNI;
     private JTextField txtLocalidad;
     private JTextField txtcalle;
     private JTextField txtAltura;
     private JTextField txtNombreDeUsuario;
+    private JTextField txtContraseña;
+
     private JPanel panelComponentes;
 
     private Paciente paciente = null;
@@ -59,6 +64,7 @@ public class PanelFormularioPacientes extends JPanel {
         lblcalle = new JLabel("Calle: ");
         lblAltura = new JLabel("Altura: ");
         lblNombreDeUsuario = new JLabel("Nombre de usuario: ");
+        lblContraseña = new JLabel("Contraseña: ");
 
         txtNombreCompleto = new JTextField(8);
         txtDNI = new JTextField(8);
@@ -66,6 +72,7 @@ public class PanelFormularioPacientes extends JPanel {
         txtcalle = new JTextField(8);
         txtAltura = new JTextField(8);
         txtNombreDeUsuario = new JTextField(8);
+        txtContraseña = new JTextField(8);
 
 
         panelComponentes.add(lblNombreCompleto);
@@ -80,10 +87,13 @@ public class PanelFormularioPacientes extends JPanel {
         panelComponentes.add(txtAltura);
         panelComponentes.add(lblNombreDeUsuario);
         panelComponentes.add(txtNombreDeUsuario);
+        panelComponentes.add(lblContraseña);
+        panelComponentes.add(txtContraseña);
+
 
         SpringLayout springLayout = new SpringLayout();
         panelComponentes.setLayout(springLayout);
-        SpringUtilities.makeCompactGrid(panelComponentes,6,2);
+        SpringUtilities.makeCompactGrid(panelComponentes,7,2);
 
         this.setVisible(true);
         add(panelBotonera, BorderLayout.SOUTH);
@@ -98,7 +108,6 @@ public class PanelFormularioPacientes extends JPanel {
                 if (paciente != null) {
                     paciente.setNombreCompleto(txtNombreCompleto.getText());
                     paciente.setDni(txtDNI.getText());
-
                     Domicilio domicilio = new Domicilio();
                     domicilio.setLocalidad(txtLocalidad.getText());
                     domicilio.setCalle(txtcalle.getText());
@@ -109,8 +118,7 @@ public class PanelFormularioPacientes extends JPanel {
                 // Si no existia creo uno nuevo
                 else {
                     paciente = new Paciente(
-                            txtNombreDeUsuario.getText(),
-                            "asd",
+                            txtNombreDeUsuario.getText(),txtContraseña.getText(),
                             txtNombreCompleto.getText(),
                             txtDNI.getText(),
                             new Domicilio(

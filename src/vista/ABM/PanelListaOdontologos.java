@@ -109,7 +109,6 @@ public class PanelListaOdontologos extends JPanel {
                 int id = Integer.valueOf(obtenerID);
                 OdontologoService service = new OdontologoService();
                 panelManagerABM.mostrarPanelFormularioOdontologos(service.buscar(id));
-
             }
         });
     }

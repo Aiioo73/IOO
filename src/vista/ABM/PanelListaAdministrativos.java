@@ -17,11 +17,13 @@ public class PanelListaAdministrativos extends JPanel {
     private JButton btnAlta;
     private JButton btnBaja;
     private JButton btnModificar;
-    private JPanel panelBotonera;  //Creo un panel para los botones
-
+    //Creo un panel para los botones
+    private JPanel panelBotonera;
+    //Creo una tabla para manejar los datos
     private JTable tableAdministrativos;
-    private DefaultTableModel contenidoTable;  //Sirve para manejar el contenido de la tabla
-    private JScrollPane scrollPane;   //Sirve para poder hacer el Scroll en la grilla.
+    //Manejar el contenido de la tabla
+    private DefaultTableModel contenidoTable;
+    private JScrollPane scrollPane;
 
     public PanelListaAdministrativos(PanelManagerABM panelManagerABM){
         this.panelManagerABM = panelManagerABM;
@@ -43,22 +45,24 @@ public class PanelListaAdministrativos extends JPanel {
         panelBotonera.add(btnModificar);
 
         //Listado en Jtable
-
         scrollPane = new JScrollPane();
         contenidoTable = new DefaultTableModel();
         tableAdministrativos = new JTable(contenidoTable);
         //Agrego la tabla de pacientes al ScrollPane:
         scrollPane.setViewportView(tableAdministrativos);
 
+        //Instancio el Service
         AdministrativoService service = new AdministrativoService();
         List<Administrativo> lista = service.listar();
+
+        //creo la Tabla
         contenidoTable.addColumn("ID");
         contenidoTable.addColumn("Nombre Completo");
         contenidoTable.addColumn("Nombre de Usuario");
         contenidoTable.addColumn("DNI");
         contenidoTable.addColumn("Fecha de Alta");
-        for (Administrativo administrativo : lista) {
 
+        for (Administrativo administrativo : lista) {
             Object[] row = new Object[5];
             row[0] = administrativo.getId();
             row[1] = administrativo.getNombreCompleto();
@@ -67,7 +71,6 @@ public class PanelListaAdministrativos extends JPanel {
             row[4] = administrativo.getFechaAlta();
 
             contenidoTable.addRow(row);
-
         }
 
         //Muestro la tabla y el panel:
@@ -75,14 +78,11 @@ public class PanelListaAdministrativos extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
         this.setVisible(true);
 
-
-
-
         //Eventos
         btnAlta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //llamar al formulario:
+                //Llamar al formularioAdministrativos
                 panelManagerABM.mostrarPanelFormularioAdministrativos();
             }
         });
@@ -90,7 +90,7 @@ public class PanelListaAdministrativos extends JPanel {
         btnBaja.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Obtengo el valor del ID para poder saber que valor elimino del JSON
+                //Obtengo el valor del ID para poder saber que valor elimino.
 
                 String obtenerID = tableAdministrativos.getValueAt(tableAdministrativos.getSelectedRow(),0).toString();
                 System.out.println(obtenerID);
@@ -108,7 +108,9 @@ public class PanelListaAdministrativos extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 String obtenerID = tableAdministrativos.getValueAt(tableAdministrativos.getSelectedRow(),0).toString();
                 int id = Integer.valueOf(obtenerID);
+                AdministrativoService administrativoService = new AdministrativoService();
                 panelManagerABM.mostrarPanelFormularioAdministrativos(service.buscar(id));
+
             }
         });
 

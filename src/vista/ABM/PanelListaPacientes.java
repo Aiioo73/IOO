@@ -12,16 +12,18 @@ import java.util.List;
 
 public class PanelListaPacientes extends JPanel {
 
+    private PanelManagerABM panelManagerABM;
+
     private JButton btnAlta;
     private JButton btnBaja;
     private JButton btnModificar;
-    private JPanel panelBotonera;  //Creo un panel para los botones
-
+    //Creo un panel para los botones
+    private JPanel panelBotonera;
+    //Creo una tabla para manejar los datos
     private JTable tablePacientes;
-    private DefaultTableModel contenidoTable;  //Sirve para manejar el contenido de la tabla
-    private JScrollPane scrollPane;   //Sirve para poder hacer el Scroll en la grilla.
-
-    private PanelManagerABM panelManagerABM;
+    //Manejar el contenido de la tabla
+    private DefaultTableModel contenidoTable;
+    private JScrollPane scrollPane;
 
     public PanelListaPacientes(PanelManagerABM panelManagerABM){
         this.panelManagerABM = panelManagerABM;
@@ -43,17 +45,17 @@ public class PanelListaPacientes extends JPanel {
         panelBotonera.add(btnModificar);
 
         //Listado en Jtable
-
         scrollPane = new JScrollPane();
         contenidoTable = new DefaultTableModel();
         tablePacientes = new JTable(contenidoTable);
         //Agrego la tabla de pacientes al ScrollPane:
         scrollPane.setViewportView(tablePacientes);
 
-        // ------------------------------------------------------------------------//
+        //Instancio el Service
         PacienteService service = new PacienteService();
         List<Paciente> lista = service.listar();
 
+        //creo la Tabla
         contenidoTable.addColumn("ID");
         contenidoTable.addColumn("Nombre Completo");
         contenidoTable.addColumn("Nombre de Usuario");
@@ -71,32 +73,24 @@ public class PanelListaPacientes extends JPanel {
             contenidoTable.addRow(row);
         }
 
-        // ------------------------------------------------------------------------//
-
-
         //Muestro la tabla y el panel:
         add(panelBotonera, BorderLayout.SOUTH);
         add(scrollPane, BorderLayout.CENTER);
         this.setVisible(true);
 
-
-
-
-
         //Eventos
         btnAlta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //llamar al formulario:
+                //Llamar al formularioPacientes
                 panelManagerABM.mostrarPanelFormularioPacientes();
             }
         });
 
-
         btnBaja.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //Obtengo el valor del ID para poder saber que valor elimino del JSON
+                //Obtengo el valor del ID para poder saber que valor elimino.
 
                 String obtenerID = tablePacientes.getValueAt(tablePacientes.getSelectedRow(),0).toString();
                 System.out.println(obtenerID);
@@ -116,7 +110,6 @@ public class PanelListaPacientes extends JPanel {
                 PacienteService pacienteService = new PacienteService();
                 panelManagerABM.mostrarPanelFormularioPacientes(pacienteService.buscar(id));
 
-                //No está funcionando, está creando un nuevo ID.
             }
         });
 
