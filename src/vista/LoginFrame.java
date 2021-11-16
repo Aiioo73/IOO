@@ -84,6 +84,7 @@ public class LoginFrame extends JFrame implements ActionListener {
             if (administrativo != null) {
                 System.out.println("administ");
                 if (administrativo.checkPassword(pwdText)) {
+                    UsuarioLogeadoService.obtenerInstancia().setIdUsuarioLogeado(administrativo.getId());
                     // PUM Login a la vista de ADMIN
                     MainAdminFrame mf = new MainAdminFrame();
                     mf.setTitle("Admin Main");
