@@ -18,7 +18,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class MostrarTurnosFrame extends JFrame implements ActionListener {
-    JFrame frame = new JFrame(" ");
+    // JFrame frame = new JFrame(" ");
     JTextArea txtsub;
     Container container;
     JLabel titulo;
@@ -27,8 +27,7 @@ public class MostrarTurnosFrame extends JFrame implements ActionListener {
 
     public MostrarTurnosFrame() throws ParseException {
         super("Mis turnos");
-        txtsub = new JTextArea(100, 100);
-
+        txtsub = new JTextArea(10, 20);
         titulo = new JLabel("Usted tiene asignados los siguientes turnos:");
         titulo.setFont(new Font("Arial", Font.PLAIN, 16));
 
@@ -41,8 +40,6 @@ public class MostrarTurnosFrame extends JFrame implements ActionListener {
         setSize(600, 450);
         setLocation(0, 0);
         setResizable(false);
-        setLayout(null);
-        setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         titulo.setBounds(30, 50, 400, 40);
@@ -53,6 +50,8 @@ public class MostrarTurnosFrame extends JFrame implements ActionListener {
         txtsub.setEditable(false);
         salir.setBounds(215, 350, 170, 40);
         salir.setFont(new Font("Arial", Font.PLAIN, 16));
+
+        setVisible(true);
 
         salir.addActionListener(this);
 

@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 public class RegistroTurnosFrame extends JFrame implements ActionListener {
-    JFrame frame = new JFrame(" ");
+    // JFrame frame = new JFrame(" ");
     JComboBox<String> comboOdontologos, comboDias, comboHorarios;
     JTextArea txtsub;
     Container container;
