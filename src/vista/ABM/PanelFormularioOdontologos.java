@@ -29,7 +29,6 @@ public class PanelFormularioOdontologos extends JPanel {
     private JLabel lblHoraEntrada;
     private JLabel lblHoraSalida;
 
-
     private JTextField txtNombreCompleto;
     private JTextField txtDNI;
     private JTextField txtLocalidad;
@@ -165,6 +164,8 @@ public class PanelFormularioOdontologos extends JPanel {
 
     //Necesito llenar el formulario para cuando quieran modificar algo:
     public void llenarFormulario(Odontologo odontologo){
+        this.odontologo = odontologo;
+
         txtNombreCompleto.setText(odontologo.getNombreCompleto());
         txtDNI.setText(odontologo.getDni());
         txtLocalidad.setText(odontologo.getDomicilio().getLocalidad());

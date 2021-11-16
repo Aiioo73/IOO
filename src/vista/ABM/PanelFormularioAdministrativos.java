@@ -16,6 +16,7 @@ public class PanelFormularioAdministrativos extends JPanel {
 
     private JButton btnGuardar;
     private JButton btnCancelar;
+
     private JPanel panelBotonera;
 
     private JLabel lblNombreCompleto;
@@ -24,14 +25,19 @@ public class PanelFormularioAdministrativos extends JPanel {
     private JLabel lblcalle;
     private JLabel lblAltura;
     private JLabel lblNombreDeUsuario;
+    private JLabel lblContraseña;
+
     private JTextField txtNombreCompleto;
     private JTextField txtDNI;
     private JTextField txtLocalidad;
     private JTextField txtcalle;
     private JTextField txtAltura;
     private JTextField txtNombreDeUsuario;
+    private JTextField txtContraseña;
+
     private JPanel panelComponentes;
 
+    private Administrativo administrativo = null;
 
     public PanelFormularioAdministrativos(PanelManagerABM panelManagerABM){
         this.panelManagerABM = panelManagerABM;
@@ -55,6 +61,7 @@ public class PanelFormularioAdministrativos extends JPanel {
         lblcalle = new JLabel("Calle: ");
         lblAltura = new JLabel("Altura: ");
         lblNombreDeUsuario = new JLabel("Nombre de usuario: ");
+        lblContraseña = new JLabel("Contraseña: ");
 
         txtNombreCompleto = new JTextField(8);
         txtDNI = new JTextField(8);
@@ -62,6 +69,7 @@ public class PanelFormularioAdministrativos extends JPanel {
         txtcalle = new JTextField(8);
         txtAltura = new JTextField(8);
         txtNombreDeUsuario = new JTextField(8);
+        txtContraseña = new JTextField(8);
 
         panelComponentes.add(lblNombreCompleto);
         panelComponentes.add(txtNombreCompleto);
@@ -75,10 +83,12 @@ public class PanelFormularioAdministrativos extends JPanel {
         panelComponentes.add(txtAltura);
         panelComponentes.add(lblNombreDeUsuario);
         panelComponentes.add(txtNombreDeUsuario);
+        panelComponentes.add(lblContraseña);
+        panelComponentes.add(txtContraseña);
 
         SpringLayout springLayout = new SpringLayout();
         panelComponentes.setLayout(springLayout);
-        SpringUtilities.makeCompactGrid(panelComponentes,6,2);
+        SpringUtilities.makeCompactGrid(panelComponentes,7,2);
 
         this.setVisible(true);
         add(panelBotonera, BorderLayout.SOUTH);
@@ -89,26 +99,37 @@ public class PanelFormularioAdministrativos extends JPanel {
         btnGuardar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                //Si el Odontologo ya existia:
+                if (administrativo != null){
+                    administrativo.setNombreCompleto(txtNombreCompleto.getText());
+                    administrativo.setDni(txtDNI.getText());
+                    Domicilio domicilio = new Domicilio();
+                    domicilio.setLocalidad(txtLocalidad.getText());
+                    domicilio.setCalle(txtcalle.getText());
+                    domicilio.setAltura(Integer.parseInt(txtAltura.getText()));
+                    administrativo.setDomicilio(domicilio);
+                    administrativo.setNombreUsuario(txtNombreDeUsuario.getText());
+                    administrativo.checkPassword(txtContraseña.getText());
+                }
+                //Si no existía, entonces creo uno nuevo:
+                else{
+                    administrativo = new Administrativo(
+                            txtNombreDeUsuario.getText(),txtContraseña.getText(),txtNombreCompleto.getText(),
+                            txtDNI.getText(),
+                            new Domicilio(
+                                    txtLocalidad.getText(),
+                                    txtcalle.getText(),
+                                    Integer.parseInt(txtAltura.getText())
+                            )
+                    );
+                }
+
                 //Guardar en Base de datos
-                Administrativo administrativo = new Administrativo();
-                administrativo.setNombreCompleto(txtNombreCompleto.getText());
-                administrativo.setDni(txtDNI.getText());
-
-                Domicilio domicilio = new Domicilio();
-                domicilio.setLocalidad(txtLocalidad.getText());
-                domicilio.setCalle(txtcalle.getText());
-                domicilio.setAltura(Integer.parseInt(txtAltura.getText()));
-                administrativo.setDomicilio(domicilio);
-
-                administrativo.setNombreUsuario(txtNombreDeUsuario.getText());
 
 
                 AdministrativoService administrativoService = new AdministrativoService();
                 administrativoService.guardar(administrativo);
-
-
-
-
                 System.out.println("Se grabo en la base de datos");
                 JOptionPane.showMessageDialog(panelComponentes,"Se guardaron los datos del Administrativo","Alta de Administrativo",JOptionPane.INFORMATION_MESSAGE);
                 panelManagerABM.mostrarPanelListaAdministrativos();
@@ -126,6 +147,8 @@ public class PanelFormularioAdministrativos extends JPanel {
 
 
     public void llenarFormulario(Administrativo administrativo) {
+        this.administrativo = administrativo;
+
         txtNombreCompleto.setText(administrativo.getNombreCompleto());
         txtDNI.setText(administrativo.getDni());
         txtLocalidad.setText(administrativo.getDomicilio().getLocalidad());
@@ -133,5 +156,6 @@ public class PanelFormularioAdministrativos extends JPanel {
         String Altura = Integer.valueOf(administrativo.getDomicilio().getAltura()).toString();
         txtAltura.setText(Altura);
         txtNombreDeUsuario.setText(administrativo.getNombreUsuario());
+
     }
 }
