@@ -1,7 +1,6 @@
 package vista;
 import modelo.Administrativo;
 import modelo.Paciente;
-import modelo.abstractions.Usuario;
 import servicios.AdministrativoService;
 import servicios.PacienteService;
 import servicios.UsuarioLogeadoService;

@@ -17,22 +17,26 @@ public class AdminTable extends JPanel {
     public AdminTable() {
         super(new GridLayout(1, 0));
 
-        Date hoy = DateUtils.cleanTime(new Date());
+        //Date hoy = DateUtils.cleanTime(new Date());
+        Date semana = DateUtils.addDays(DateUtils.cleanTime(new Date()), 7);
         TurnoService ts = new TurnoService();
-        List<Turno> listaTurnos = ts.listar(hoy);
-        System.out.println(listaTurnos);
+        List<Turno> listaTurnos = ts.listar(semana);
+        System.out.println(listaTurnos.get(0).getDocAsignado().getNombreCompleto());
 
         String[] columnNames = {"Odontologo",
                 "Paciente",
-                "Dia",
-                "Hora"};
-
-        Object[][] data = {
-                {"Arturo Garraham", "Leandro Silva",
-                        "16-11-2021", "14:00"},
-                {"Arturo Garraham", "Hernan Caire",
-                        "16-11-2021", "15:00"}
-        };
+                "Dia y Hora"};
+        String[][] data = new String[listaTurnos.size()][4];
+        int f = 0;
+        int c = 0;
+        while (f < listaTurnos.size()){
+            for (int i = 0; i < listaTurnos.size(); i++){
+                data[f][c] = listaTurnos.get(i).getDocAsignado().getNombreCompleto();
+                data[f][c + 1] = listaTurnos.get(i).getPaciente().getNombreCompleto();
+                data[f][c + 2] = listaTurnos.get(i).getFechaTurno().toString().substring(0, listaTurnos.get(i).getFechaTurno().toString().length() - 9);
+            }
+            f++;
+        }
 
         final JTable table = new JTable(data, columnNames);
         table.setBounds(500,55,1280,720);
