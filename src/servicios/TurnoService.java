@@ -39,6 +39,15 @@ public class TurnoService implements IService<Turno> {
         return dao.listar();
     }
 
+    public List<Turno> listar(Date fechaHasta) {
+        Date hoy = DateUtils.cleanTime(new Date());
+        List<Turno> lista = listar();
+        lista.removeIf(turno ->
+                !turno.getFechaTurno().after(hoy) || !turno.getFechaTurno().before(fechaHasta)
+                );
+        return lista;
+    }
+
     public List<Turno> listar(Odontologo odontologo) {
         List<Turno> lista = listar();
         lista.removeIf(turno -> turno.getDocAsignado() != odontologo);
