@@ -1,10 +1,16 @@
 package vista.MenuPaciente;
 
 import servicios.OdontologoService;
+import servicios.PacienteService;
 import servicios.TurnoService;
+import servicios.UsuarioLogeadoService;
+
 import java.awt.*;
 import javax.swing.*;
 import modelo.Odontologo;
+import modelo.Paciente;
+import modelo.Turno;
+
 import java.awt.event.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -22,7 +28,7 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
     JButton continuar = new JButton("Continuar");
     OdontologoService listaOdontologos = new OdontologoService();
     TurnoService listaTurnos = new TurnoService();
-    String turnoSeleccionado;
+    String turnoSeleccionado = "";
 
     public RegistroTurnosFrame() {
         super("Registrar un turno");
@@ -151,7 +157,8 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
 
         continuar.addActionListener(this);
 
-        comboOdontologos.putClientProperty("JComboBox.isTableCellEditor", Boolean.TRUE);
+        // comboOdontologos.putClientProperty("JComboBox.isTableCellEditor",
+        // Boolean.TRUE);
         comboDias.setPrototypeDisplayValue("XXXXXXXXXX"); // JDK1.4
         comboHorarios.setPrototypeDisplayValue("XXXXXXXXXX"); // JDK1.4
 
@@ -188,11 +195,39 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
 
     }
 
+    public void guardarTurno() {
+        // Obtenemos ID Paciente:
+        UsuarioLogeadoService service = UsuarioLogeadoService.obtenerInstancia();
+        int id = service.getIdUsuarioLogeado();
+
+        // Obtenemos Paciente:
+        PacienteService pacienteService = new PacienteService();
+        Paciente paciente = pacienteService.buscar(id);
+
+        String[] parametrosParaTurno = turnoSeleccionado.split("-");
+        String stringOdontologo = parametrosParaTurno[0];
+        String stringDia = parametrosParaTurno[1];
+        String stringHora = parametrosParaTurno[2];
+        Odontologo odontologo = listaOdontologos.buscar(stringOdontologo);
+
+        String fechaUnida = stringDia + " " + stringHora;
+        SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss");
+        Date fecha;
+        try {
+            fecha = formatnow.parse(fechaUnida);
+            Turno turno = new Turno(odontologo, paciente, fecha);
+            listaTurnos.guardar(turno);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == continuar) {
             JOptionPane.showMessageDialog(this, "¿Registrar turno?");
-            // GUARDAR EN BD turnoSeleccionado!!!!!!!!!
+            guardarTurno();
             setVisible(false);
         }
 

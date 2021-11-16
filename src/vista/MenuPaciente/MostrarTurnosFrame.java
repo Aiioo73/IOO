@@ -2,7 +2,6 @@ package vista.MenuPaciente;
 
 import javax.swing.*;
 
-import modelo.Odontologo;
 import modelo.Paciente;
 import modelo.Turno;
 import servicios.PacienteService;
@@ -12,7 +11,11 @@ import servicios.UsuarioLogeadoService;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MostrarTurnosFrame extends JFrame implements ActionListener {
     JFrame frame = new JFrame(" ");
@@ -22,7 +25,7 @@ public class MostrarTurnosFrame extends JFrame implements ActionListener {
     JButton salir = new JButton("Salir");
     public TurnoService listaTurnos = new TurnoService();
 
-    public MostrarTurnosFrame() {
+    public MostrarTurnosFrame() throws ParseException {
         super("Mis turnos");
         txtsub = new JTextArea(100, 100);
 
@@ -47,6 +50,7 @@ public class MostrarTurnosFrame extends JFrame implements ActionListener {
         txtsub.setLineWrap(true);
         txtsub.setWrapStyleWord(true);
         txtsub.setFont(new Font("Arial", Font.PLAIN, 16));
+        txtsub.setEditable(false);
         salir.setBounds(215, 350, 170, 40);
         salir.setFont(new Font("Arial", Font.PLAIN, 16));
 
@@ -61,12 +65,19 @@ public class MostrarTurnosFrame extends JFrame implements ActionListener {
         Paciente paciente = pacienteService.buscar(id);
 
         // Obtener turnos:
-        List<Turno> listado = this.listaTurnos.listar(paciente);
+        SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+        DateFormat date = new SimpleDateFormat("EEE MMM dd yyyy");
+        DateFormat time = new SimpleDateFormat("HH:mm:ss");
 
-
-
-
-        for(Turno a : listaTurnos.listar(paciente)){ txtsub.append(a + "\n"); }
+        if (listaTurnos.listar(paciente) != null) {
+            for (Turno a : listaTurnos.listar(paciente)) {
+                Date d = formatnow.parse((a.getFechaTurno()).toString());
+                txtsub.append("• Con el doctor " + a.getDocAsignado().getNombreCompleto() + " el dia " + date.format(d)
+                        + " a las " + time.format(d) + "\n");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No tiene turnos asignados");
+        }
 
     }
 

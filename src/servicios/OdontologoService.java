@@ -37,8 +37,8 @@ public class OdontologoService implements IService<Odontologo> {
     public Odontologo buscar(String nombreCompleto) {
         List<Odontologo> odontologos = listar();
 
-        for (Odontologo odontologo: odontologos) {
-            if (odontologo.getNombreUsuario().equals(nombreCompleto)) {
+        for (Odontologo odontologo : odontologos) {
+            if (odontologo.getNombreCompleto().equals(nombreCompleto)) {
                 return odontologo;
             }
         }

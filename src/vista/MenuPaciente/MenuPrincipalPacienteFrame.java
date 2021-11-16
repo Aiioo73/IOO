@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 
 public class MenuPrincipalPacienteFrame extends JFrame implements ActionListener {
     JFrame frame;
@@ -43,18 +44,12 @@ public class MenuPrincipalPacienteFrame extends JFrame implements ActionListener
             new RegistroTurnosFrame();
         }
         if (e.getSource() == mostrarMisTurnosButton) {
-            /*
-             * if(TENGO TURNOS ASIGNADOS){ new MostrarTurnosFrame(); }else{
-             * JOptionPane.showMessageDialog(this, "No tiene turnos asignados"); }
-             */
-            JOptionPane.showMessageDialog(this, "No tiene turnos asignados");
-            new MostrarTurnosFrame();
-
+            try {
+                new MostrarTurnosFrame();
+            } catch (ParseException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         }
-
-    }
-
-    public static void main(String[] args) {
-        new MenuPrincipalPacienteFrame();
     }
 }
