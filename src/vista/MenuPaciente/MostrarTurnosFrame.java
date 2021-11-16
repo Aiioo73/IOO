@@ -5,10 +5,14 @@ import javax.swing.*;
 import modelo.Odontologo;
 import modelo.Paciente;
 import modelo.Turno;
+import servicios.PacienteService;
 import servicios.TurnoService;
+import servicios.UsuarioLogeadoService;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class MostrarTurnosFrame extends JFrame implements ActionListener {
     JFrame frame = new JFrame(" ");
@@ -16,7 +20,7 @@ public class MostrarTurnosFrame extends JFrame implements ActionListener {
     Container container;
     JLabel titulo;
     JButton salir = new JButton("Salir");
-    TurnoService listaTurnos = new TurnoService();
+    public TurnoService listaTurnos = new TurnoService();
 
     public MostrarTurnosFrame() {
         super("Mis turnos");
@@ -48,9 +52,22 @@ public class MostrarTurnosFrame extends JFrame implements ActionListener {
 
         salir.addActionListener(this);
 
-        /*
-         * for(Turno a : listaTurnos.listar(paciente)){ txtsub.append(a + "\n"); }
-         */
+        // Obtenemos ID Paciente:
+        UsuarioLogeadoService service = UsuarioLogeadoService.obtenerInstancia();
+        int id = service.getIdUsuarioLogeado();
+
+        // Obtenemos Paciente:
+        PacienteService pacienteService = new PacienteService();
+        Paciente paciente = pacienteService.buscar(id);
+
+        // Obtener turnos:
+        List<Turno> listado = this.listaTurnos.listar(paciente);
+
+
+
+
+        for(Turno a : listaTurnos.listar(paciente)){ txtsub.append(a + "\n"); }
+
     }
 
     @Override

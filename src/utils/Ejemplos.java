@@ -39,16 +39,15 @@ public class Ejemplos {
 
         Odontologo odontologo = odontologoService.buscar(1);
 
+        Paciente paciente = new PacienteService().buscar(1);
+
         TurnoService turnoService = new TurnoService();
 
         List<Date> turnosDisponiblesOdontologo = turnoService.obtenerDisponibilidad(odontologo);
 
         for (Date turno: turnosDisponiblesOdontologo) {
-            System.out.println(odontologo.getNombreCompleto() + " tiene disponible: " + turno);
+//            System.out.println(odontologo.getNombreCompleto() + " tiene disponible: " + turno);
         }
-
-        PacienteService pacienteService = new PacienteService();
-        Paciente paciente = pacienteService.buscar(1);
 
         Turno turno = new Turno(odontologo, paciente, new Date());
 

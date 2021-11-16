@@ -47,7 +47,7 @@ public class TurnoService implements IService<Turno> {
 
     public List<Turno> listar(Paciente paciente) {
         List<Turno> lista = listar();
-        lista.removeIf(turno -> turno.getPaciente() != paciente);
+        lista.removeIf(turno -> turno.getPaciente().getId() != paciente.getId());
         return lista;
     }
 
@@ -81,5 +81,10 @@ public class TurnoService implements IService<Turno> {
 
         }
         return lista;
+    }
+
+    public void crearTurno(Odontologo odontologo, Paciente paciente, Date fecha) {
+//        Turno turno = new Turno();
+//        this.guardar(turno);
     }
 }

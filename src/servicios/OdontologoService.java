@@ -2,6 +2,7 @@ package servicios;
 
 import dao.OdontologoDAOArchivo;
 import modelo.Odontologo;
+import modelo.Paciente;
 import servicios.abstractions.IService;
 
 import java.util.List;
@@ -33,4 +34,15 @@ public class OdontologoService implements IService<Odontologo> {
         return dao.listar();
     }
 
+    public Odontologo buscar(String nombreCompleto) {
+        List<Odontologo> odontologos = listar();
+
+        for (Odontologo odontologo: odontologos) {
+            if (odontologo.getNombreUsuario().equals(nombreCompleto)) {
+                return odontologo;
+            }
+        }
+
+        return null;
+    }
 }
