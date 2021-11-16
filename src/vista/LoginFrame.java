@@ -74,13 +74,13 @@ public class LoginFrame extends JFrame implements ActionListener {
         //userText = userTextField.getText();
         //pwdText = passwordField.getText();
 
-        // Busco si es un admin
+
         if (e.getSource() == loginButton) {
             userText = userTextField.getText();
             pwdText = passwordField.getText();
             AdministrativoService administrativoService = new AdministrativoService();
             Administrativo administrativo = administrativoService.buscar(userText);
-
+            // Busco si es un admin
             if (administrativo != null) {
                 System.out.println("administ");
                 if (administrativo.checkPassword(pwdText)) {
