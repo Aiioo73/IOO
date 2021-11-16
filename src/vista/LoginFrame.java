@@ -71,8 +71,6 @@ public class LoginFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String userText;
         String pwdText;
-        //userText = userTextField.getText();
-        //pwdText = passwordField.getText();
 
 
         if (e.getSource() == loginButton) {
@@ -82,10 +80,8 @@ public class LoginFrame extends JFrame implements ActionListener {
             Administrativo administrativo = administrativoService.buscar(userText);
             // Busco si es un admin
             if (administrativo != null) {
-                System.out.println("administ");
                 if (administrativo.checkPassword(pwdText)) {
                     UsuarioLogeadoService.obtenerInstancia().setIdUsuarioLogeado(administrativo.getId());
-                    // PUM Login a la vista de ADMIN
                     MainAdminFrame mf = new MainAdminFrame();
                     mf.setTitle("Admin Main");
                     mf.setVisible(true);
@@ -104,7 +100,6 @@ public class LoginFrame extends JFrame implements ActionListener {
 
             if (paciente != null) {
                 if (paciente.checkPassword(pwdText)) {
-                    // PUM Login a la vista de PACIENTE
                     UsuarioLogeadoService.obtenerInstancia().setIdUsuarioLogeado(paciente.getId());
                     new MenuPrincipalPacienteFrame();
                     setVisible(false);
@@ -116,35 +111,12 @@ public class LoginFrame extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }
         }
-
-
-
-        // PUMBA ERROR LOGIN
-
-        //Coding Part of LOGIN button
-        /*if (e.getSource() == loginButton) {
-//            String userText;
-//            String pwdText;
-            userText = userTextField.getText();
-            pwdText = passwordField.getText();
-            if (userText.equalsIgnoreCase("usuario") && pwdText.equalsIgnoreCase("12345")) {
-                MainAdminFrame mf = new MainAdminFrame();
-                mf.setTitle("Admin Main");
-                mf.setVisible(true);
-                mf.setBounds(500,65,1280,720);
-                mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                mf.setResizable(false);
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid Username or Password");
-            }
-
-        }*/
-        //Coding Part of RESET button
+        //RESET button
         if (e.getSource() == resetButton) {
             userTextField.setText("");
             passwordField.setText("");
         }
-        //Coding Part of showPassword JCheckBox
+        //showPassword JCheckBox
         if (e.getSource() == showPassword) {
             if (showPassword.isSelected()) {
                 passwordField.setEchoChar((char) 0);

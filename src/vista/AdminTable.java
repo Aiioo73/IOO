@@ -1,15 +1,26 @@
 package vista;
+import modelo.Turno;
+import servicios.TurnoService;
+import utils.DateUtils;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.GridLayout;
+import java.util.Date;
+import java.util.List;
 
 
 public class AdminTable extends JPanel {
 
     public AdminTable() {
         super(new GridLayout(1, 0));
+
+        Date hoy = DateUtils.cleanTime(new Date());
+        TurnoService ts = new TurnoService();
+        List<Turno> listaTurnos = ts.listar(hoy);
+        System.out.println(listaTurnos);
 
         String[] columnNames = {"Odontologo",
                 "Paciente",
@@ -36,7 +47,6 @@ public class AdminTable extends JPanel {
     public void createAndShowGUI() {
         //Create and set up the window.
         JFrame frame = new JFrame("Turnos Semanales");
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setBounds(600,180,1280,720);
         //Create and set up the content pane.
         AdminTable newContentPane = new AdminTable();
