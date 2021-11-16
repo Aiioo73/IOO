@@ -42,9 +42,7 @@ public class TurnoService implements IService<Turno> {
     public List<Turno> listar(Date fechaHasta) {
         Date hoy = DateUtils.cleanTime(new Date());
         List<Turno> lista = listar();
-        lista.removeIf(turno ->
-                !turno.getFechaTurno().after(hoy) || !turno.getFechaTurno().before(fechaHasta)
-                );
+        lista.removeIf(turno -> !turno.getFechaTurno().after(hoy) || !turno.getFechaTurno().before(fechaHasta));
         return lista;
     }
 
@@ -61,14 +59,12 @@ public class TurnoService implements IService<Turno> {
     }
 
     public List<Date> obtenerDisponibilidad(Odontologo odontologo) {
-        List<Date> turnosSemana = obtenerTurnosSemana(
-                odontologo.getHoraEntrada(),
-                odontologo.getHoraSalida()
-        );
+        List<Date> turnosSemana = obtenerTurnosSemana(odontologo.getHoraEntrada(), odontologo.getHoraSalida());
         List<Date> resultado = new ArrayList<>(turnosSemana);
-        List<Date> turnosOcupados = listar(odontologo).stream().map(Turno::getFechaTurno).collect(Collectors.toList());;
+        List<Date> turnosOcupados = listar(odontologo).stream().map(Turno::getFechaTurno).collect(Collectors.toList());
+        ;
 
-        for (Date turno: turnosSemana) {
+        for (Date turno : turnosSemana) {
             if (turnosOcupados.contains(turno)) {
                 resultado.remove(turno);
             }
@@ -83,7 +79,7 @@ public class TurnoService implements IService<Turno> {
             Date hoy = DateUtils.cleanTime(new Date());
             Date dia = DateUtils.addDays(hoy, i);
 
-            for (int horaTurno = primeraHora; horaTurno < ultimaHora; horaTurno++){
+            for (int horaTurno = primeraHora; horaTurno < ultimaHora; horaTurno++) {
                 Date turno = DateUtils.addHours(dia, horaTurno);
                 lista.add(turno);
             }
@@ -93,7 +89,7 @@ public class TurnoService implements IService<Turno> {
     }
 
     public void crearTurno(Odontologo odontologo, Paciente paciente, Date fecha) {
-//        Turno turno = new Turno();
-//        this.guardar(turno);
+        Turno turno = new Turno(odontologo, paciente, fecha);
+        this.guardar(turno);
     }
 }
