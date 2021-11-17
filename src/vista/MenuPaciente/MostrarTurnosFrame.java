@@ -42,7 +42,7 @@ public class MostrarTurnosFrame extends JFrame implements ActionListener {
         setSize(600, 450);
         setLocation(0, 0);
         setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         titulo.setBounds(30, 50, 400, 40);
         txtsub.setBounds(50, 120, 500, 200);

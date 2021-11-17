@@ -98,7 +98,7 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if ((e.getStateChange() == ItemEvent.SELECTED)) {
-                    llenarLosHorariosDelOdontologo();
+                    llenarLosHorariosDelOdontologo(e.getItem().toString());
                 }
             }
         });
@@ -123,38 +123,29 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
 
     }
 
-    private void llenarLosHorariosDelOdontologo() {
+    private void llenarLosHorariosDelOdontologo(String diaSeleccionadoString) {
         str = comboOdontologos.getSelectedItem().toString();
         Odontologo odontologo = listaOdontologos.buscar(str);
 
-        List<Date> dias = listaTurnos.obtenerDisponibilidad(odontologo);
+        List<Date> horarios = listaTurnos.obtenerDisponibilidad(odontologo);
 
-        for (Date dia : dias) {
+        // Filtrar horarios por el día seleccionado
 
-            SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
-            DateFormat time = new SimpleDateFormat("HH:mm:ss");
-            DateFormat date = new SimpleDateFormat("EEE MMM dd yyyy");
-            Date d;
+        SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
+        DateFormat time = new SimpleDateFormat("HH:mm:ss");
+        DateFormat date = new SimpleDateFormat("EEE MMM dd yyyy");
+        Date d;
+
+        for (Date horario : horarios) {
             try {
-                d = formatnow.parse(dia.toString());
-                // para no repetir los horarios
-                boolean exists1 = false;
-                for (int index = 0; index < comboHorarios.getItemCount() && !exists1; index++) {
-                    if ((time.format(d)).equals(comboHorarios.getItemAt(index))) {
-                        exists1 = true;
-                    }
+                d = formatnow.parse(horario.toString());
+                String diaDelHorario = date.format(d);
+                if (diaSeleccionadoString.equals(diaDelHorario)) {
+                    comboHorarios.addItem(time.format(d));
                 }
-                // si no esta repetido
-                if (!exists1) {
-                    if (str1.equals(date.format(d))) {
-                        comboHorarios.addItem(time.format(d));
-                    }
-                }
-            } catch (ParseException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-
         }
 
         str = comboOdontologos.getSelectedItem().toString();
