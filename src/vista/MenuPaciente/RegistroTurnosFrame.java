@@ -29,6 +29,7 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
     OdontologoService listaOdontologos = new OdontologoService();
     TurnoService listaTurnos = new TurnoService();
     String turnoSeleccionado = "";
+    String str, str1, str2;
 
     public RegistroTurnosFrame() {
         super("Registrar un turno");
@@ -61,7 +62,7 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
         setResizable(false);
         setLayout(null);
         setVisible(true);
-//        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        // setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
         seleccionOdontologo.setBounds(30, 50, 250, 40);
         comboOdontologos.setBounds(290, 50, 250, 35);
@@ -78,53 +79,61 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
 
         for (Odontologo odontologo : listaOdontologos.listar()) {
             comboOdontologos.addItem(odontologo.getNombreCompleto());
-            List<Date> dias = listaTurnos.obtenerDisponibilidad(odontologo);
-
-            for (Date dia : dias) {
-                try {
-                    SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
-                    DateFormat date = new SimpleDateFormat("EEE MMM dd yyyy");
-                    DateFormat time = new SimpleDateFormat("HH:mm:ss");
-                    Date d = formatnow.parse(dia.toString());
-
-                    // para no repetir los dias
-                    boolean exists1 = false;
-                    for (int index = 0; index < comboDias.getItemCount() && !exists1; index++) {
-                        if ((date.format(d)).equals(comboDias.getItemAt(index))) {
-                            exists1 = true;
-                        }
-                    }
-                    if (!exists1) {
-                        comboDias.addItem(date.format(d));
-                    }
-
-                    // para no repetir los horarios
-                    boolean exists2 = false;
-                    for (int index = 0; index < comboHorarios.getItemCount() && !exists2; index++) {
-                        if ((time.format(d)).equals(comboHorarios.getItemAt(index))) {
-                            exists2 = true;
-                        }
-                    }
-                    if (!exists2) {
-                        comboHorarios.addItem(time.format(d));
-                    }
-
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
+            /*
+             * List<Date> dias = listaTurnos.obtenerDisponibilidad(odontologo);
+             * 
+             * for (Date dia : dias) { try { SimpleDateFormat formatnow = new
+             * SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH); DateFormat
+             * date = new SimpleDateFormat("EEE MMM dd yyyy"); DateFormat time = new
+             * SimpleDateFormat("HH:mm:ss"); Date d = formatnow.parse(dia.toString());
+             * 
+             * // para no repetir los dias boolean exists1 = false; for (int index = 0;
+             * index < comboDias.getItemCount() && !exists1; index++) { if
+             * ((date.format(d)).equals(comboDias.getItemAt(index))) { exists1 = true; } }
+             * if (!exists1) { comboDias.addItem(date.format(d)); }
+             * 
+             * // para no repetir los horarios boolean exists2 = false; for (int index = 0;
+             * index < comboHorarios.getItemCount() && !exists2; index++) { if
+             * ((time.format(d)).equals(comboHorarios.getItemAt(index))) { exists2 = true; }
+             * } if (!exists2) { comboHorarios.addItem(time.format(d)); }
+             * 
+             * } catch (ParseException e) { e.printStackTrace(); } }
+             */
         }
 
-        comboOdontologos.addActionListener(this);
         comboOdontologos.addItemListener(new ItemListener() {
 
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if ((e.getStateChange() == ItemEvent.SELECTED)) {
-                    String str = comboOdontologos.getSelectedItem().toString();
-                    String str1 = comboDias.getSelectedItem().toString();
-                    String str2 = comboHorarios.getSelectedItem().toString();
-                    setLabelText(str, str1, str2);
+                    str = comboOdontologos.getSelectedItem().toString();
+                    Odontologo odontologo = listaOdontologos.buscar(str);
+
+                    List<Date> dias = listaTurnos.obtenerDisponibilidad(odontologo);
+
+                    for (Date dia : dias) {
+                        SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",
+                                Locale.ENGLISH);
+                        DateFormat date = new SimpleDateFormat("EEE MMM dd yyyy");
+                        Date d;
+                        try {
+                            d = formatnow.parse(dia.toString());
+                            // para no repetir los dias
+                            boolean exists1 = false;
+                            for (int index = 0; index < comboDias.getItemCount() && !exists1; index++) {
+                                if ((date.format(d)).equals(comboDias.getItemAt(index))) {
+                                    exists1 = true;
+                                }
+                            }
+                            if (!exists1) {
+                                comboDias.addItem(date.format(d));
+                            }
+                        } catch (ParseException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        }
+                    }
+                    str1 = comboDias.getSelectedItem().toString();
                 }
             }
         });
@@ -134,10 +143,42 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if ((e.getStateChange() == ItemEvent.SELECTED)) {
-                    String str = comboOdontologos.getSelectedItem().toString();
-                    String str1 = comboDias.getSelectedItem().toString();
-                    String str2 = comboHorarios.getSelectedItem().toString();
+
+                    str = comboOdontologos.getSelectedItem().toString();
+                    Odontologo odontologo = listaOdontologos.buscar(str);
+
+                    List<Date> dias = listaTurnos.obtenerDisponibilidad(odontologo);
+
+                    for (Date dia : dias) {
+
+                        SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy",
+                                Locale.ENGLISH);
+                        DateFormat time = new SimpleDateFormat("HH:mm:ss");
+                        Date d;
+                        try {
+                            d = formatnow.parse(dia.toString());
+                            // para no repetir los horarios
+                            boolean exists1 = false;
+                            for (int index = 0; index < comboHorarios.getItemCount() && !exists1; index++) {
+                                if ((time.format(d)).equals(comboHorarios.getItemAt(index))) {
+                                    exists1 = true;
+                                }
+                            }
+                            if (!exists1) {
+                                comboHorarios.addItem(time.format(d));
+                            }
+                        } catch (ParseException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        }
+
+                    }
+
+                    str = comboOdontologos.getSelectedItem().toString();
+                    str1 = comboDias.getSelectedItem().toString();
+                    str2 = comboHorarios.getSelectedItem().toString();
                     setLabelText(str, str1, str2);
+
                 }
             }
         });
@@ -147,9 +188,9 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if ((e.getStateChange() == ItemEvent.SELECTED)) {
-                    String str = comboOdontologos.getSelectedItem().toString();
-                    String str1 = comboDias.getSelectedItem().toString();
-                    String str2 = comboHorarios.getSelectedItem().toString();
+                    str = comboOdontologos.getSelectedItem().toString();
+                    str1 = comboDias.getSelectedItem().toString();
+                    str2 = comboHorarios.getSelectedItem().toString();
                     setLabelText(str, str1, str2);
                 }
             }
@@ -157,8 +198,6 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
 
         continuar.addActionListener(this);
 
-        // comboOdontologos.putClientProperty("JComboBox.isTableCellEditor",
-        // Boolean.TRUE);
         comboDias.setPrototypeDisplayValue("XXXXXXXXXX"); // JDK1.4
         comboHorarios.setPrototypeDisplayValue("XXXXXXXXXX"); // JDK1.4
 
