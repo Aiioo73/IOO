@@ -59,6 +59,7 @@ public class MenuPrincipalPacienteFrame extends JFrame implements ActionListener
             }
         }
         if (e.getSource() == cerrarSesionButton) {
+            JOptionPane.showMessageDialog(this, "Ha cerrado sesión");
             new LoginFrame();
             setVisible(false);
         }
