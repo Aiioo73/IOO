@@ -9,7 +9,6 @@ public abstract class Usuario extends Entidad {
     private String nombreUsuario;
     private String password;
     private String nombreCompleto;
-
     private String dni;
     private Date fechaAlta;
 

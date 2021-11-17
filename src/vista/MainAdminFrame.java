@@ -15,6 +15,7 @@ public class MainAdminFrame extends JFrame implements ActionListener {
     JButton pacienteButton = new JButton("Pacientes");
     JButton adminButton = new JButton("Administradores");
     JButton turnosButton = new JButton("Turnos Semanales");
+    JButton cerrarSesionButton = new JButton("Cerrar sesión");
     //JButton registroTurnoButton = new JButton("Registrar Turno");
 
 
@@ -63,6 +64,7 @@ public class MainAdminFrame extends JFrame implements ActionListener {
         adminButton.setBounds(180, 25, 130, 30);
         odontologosButton.setBounds(310, 25, 130, 30);
         turnosButton.setBounds(440, 25, 140, 30);
+        cerrarSesionButton.setBounds(570,25,130,30);
 
     }
 
@@ -71,6 +73,7 @@ public class MainAdminFrame extends JFrame implements ActionListener {
         container.add(pacienteButton);
         container.add(adminButton);
         container.add(turnosButton);
+        container.add(cerrarSesionButton);
         //container.add(registroTurnoButton);
     }
 
@@ -79,6 +82,7 @@ public class MainAdminFrame extends JFrame implements ActionListener {
         pacienteButton.addActionListener(this);
         turnosButton.addActionListener(this);
         adminButton.addActionListener(this);
+        cerrarSesionButton.addActionListener(this);
     }
 
 
@@ -97,6 +101,10 @@ public class MainAdminFrame extends JFrame implements ActionListener {
         }
         if (e.getSource()== adminButton){
             setAdminABMTable();
+        }
+        if (e.getSource() == cerrarSesionButton) {
+            new LoginFrame();
+            setVisible(false);
         }
 
 
