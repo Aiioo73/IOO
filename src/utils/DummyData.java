@@ -28,8 +28,8 @@ public class DummyData {
                 new Domicilio("Brooklyngo", "Wallaby", 1234)
         );
 
-        lista.add(paciente1);
         lista.add(paciente2);
+        lista.add(paciente1);
         return lista;
     }
 
