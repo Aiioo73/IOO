@@ -26,8 +26,8 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
     Container container;
     JLabel seleccionOdontologo, seleccionDia, seleccionHorario;
     JButton continuar = new JButton("Continuar");
-    OdontologoService listaOdontologos = new OdontologoService();
-    TurnoService listaTurnos = new TurnoService();
+    OdontologoService odontologoService = new OdontologoService();
+    TurnoService turnoService = new TurnoService();
     String turnoSeleccionado = "";
     String str, str1, str2;
 
@@ -79,7 +79,7 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
         continuar.setBounds(215, 350, 170, 40);
         continuar.setFont(new Font("Arial", Font.PLAIN, 16));
 
-        for (Odontologo odontologo : listaOdontologos.listar()) {
+        for (Odontologo odontologo : odontologoService.listar()) {
             comboOdontologos.addItem(odontologo.getNombreCompleto());
         }
 
@@ -125,9 +125,9 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
 
     private void llenarLosHorariosDelOdontologo(String diaSeleccionadoString) {
         str = comboOdontologos.getSelectedItem().toString();
-        Odontologo odontologo = listaOdontologos.buscar(str);
+        Odontologo odontologo = odontologoService.buscar(str);
 
-        List<Date> horarios = listaTurnos.obtenerDisponibilidad(odontologo);
+        List<Date> horarios = turnoService.obtenerDisponibilidad(odontologo);
 
         // Filtrar horarios por el día seleccionado
 
@@ -156,9 +156,9 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
 
     private void llenarLosDiasDelOdontologo() {
         str = comboOdontologos.getSelectedItem().toString();
-        Odontologo odontologo = listaOdontologos.buscar(str);
+        Odontologo odontologo = odontologoService.buscar(str);
 
-        List<Date> dias = listaTurnos.obtenerDisponibilidad(odontologo);
+        List<Date> dias = turnoService.obtenerDisponibilidad(odontologo);
 
         for (Date dia : dias) {
             SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy", Locale.ENGLISH);
@@ -250,7 +250,7 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
         String stringOdontologo = parametrosParaTurno[0];
         String stringDia = parametrosParaTurno[1];
         String stringHora = parametrosParaTurno[2];
-        Odontologo odontologo = listaOdontologos.buscar(stringOdontologo);
+        Odontologo odontologo = odontologoService.buscar(stringOdontologo);
 
         String fechaUnida = stringDia + " " + stringHora;
         SimpleDateFormat formatnow = new SimpleDateFormat("EEE MMM dd yyyy HH:mm:ss");
@@ -258,7 +258,7 @@ public class RegistroTurnosFrame extends JFrame implements ActionListener {
         try {
             fecha = formatnow.parse(fechaUnida);
             Turno turno = new Turno(odontologo, paciente, fecha);
-            listaTurnos.guardar(turno);
+            turnoService.guardar(turno);
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
