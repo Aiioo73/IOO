@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
 
 public class MainAdminFrame extends JFrame implements ActionListener {
 
@@ -63,8 +62,8 @@ public class MainAdminFrame extends JFrame implements ActionListener {
         pacienteButton.setBounds(50, 25, 130, 30);
         adminButton.setBounds(180, 25, 130, 30);
         odontologosButton.setBounds(310, 25, 130, 30);
-        turnosButton.setBounds(440, 25, 140, 30);
-        cerrarSesionButton.setBounds(570,25,130,30);
+        turnosButton.setBounds(440, 25, 130, 30);
+        cerrarSesionButton.setBounds(1090,25,130,30);
 
     }
 
