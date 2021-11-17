@@ -1,4 +1,5 @@
 package vista;
+
 import modelo.Administrativo;
 import modelo.Paciente;
 import servicios.AdministrativoService;
@@ -14,7 +15,6 @@ import java.awt.event.ActionListener;
 //Creating LoginFrame class
 public class LoginFrame extends JFrame implements ActionListener {
 
-
     Container container = getContentPane();
     JLabel userLabel = new JLabel("USERNAME");
     JLabel passwordLabel = new JLabel("PASSWORD");
@@ -24,8 +24,13 @@ public class LoginFrame extends JFrame implements ActionListener {
     JButton resetButton = new JButton("RESET");
     JCheckBox showPassword = new JCheckBox("Show Password");
 
+    public LoginFrame() {
+        setTitle("Login Form");
+        setVisible(true);
+        setBounds(500, 65, 370, 600);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
 
-    LoginFrame() {
         setLayoutManager();
         setLocationAndSize();
         addComponentsToContainer();
@@ -46,7 +51,6 @@ public class LoginFrame extends JFrame implements ActionListener {
         loginButton.setBounds(50, 300, 100, 30);
         resetButton.setBounds(200, 300, 100, 30);
 
-
     }
 
     public void addComponentsToContainer() {
@@ -65,12 +69,10 @@ public class LoginFrame extends JFrame implements ActionListener {
         showPassword.addActionListener(this);
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         String userText;
         String pwdText;
-
 
         if (e.getSource() == loginButton) {
             userText = userTextField.getText();
@@ -103,19 +105,19 @@ public class LoginFrame extends JFrame implements ActionListener {
                     new MenuPrincipalPacienteFrame();
                     setVisible(false);
                     return;
-                }else{
+                } else {
                     JOptionPane.showMessageDialog(this, "Invalid Username or Password");
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "Invalid Username or Password");
             }
         }
-        //RESET button
+        // RESET button
         if (e.getSource() == resetButton) {
             userTextField.setText("");
             passwordField.setText("");
         }
-        //showPassword JCheckBox
+        // showPassword JCheckBox
         if (e.getSource() == showPassword) {
             if (showPassword.isSelected()) {
                 passwordField.setEchoChar((char) 0);
@@ -126,5 +128,3 @@ public class LoginFrame extends JFrame implements ActionListener {
         }
     }
 }
-
-
